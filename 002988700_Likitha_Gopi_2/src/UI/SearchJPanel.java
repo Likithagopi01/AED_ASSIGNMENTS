@@ -5,9 +5,18 @@
  */
 package UI;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import model.Car;
 import model.CarHistory;
@@ -62,6 +71,7 @@ public class SearchJPanel extends javax.swing.JPanel {
         paneserial.setVisible(false);
         panemodel.setVisible(false);
         panecity.setVisible(false);
+        paneTime.setVisible(false);
         table17.setVisible(false);
         table18.setVisible(false);
 
@@ -225,14 +235,14 @@ public class SearchJPanel extends javax.swing.JPanel {
 
         this.ManufacturerCar = new ArrayList();
         List<String> list = new ArrayList<String>();
-        
-        for(Car ch: history.getHistory()){
-            if(!list.contains(ch.getBrand())){
-                 ManufacturerCar.add(ch);
-                 list.add(ch.getBrand());
+
+        for (Car ch : history.getHistory()) {
+            if (!list.contains(ch.getBrand())) {
+                ManufacturerCar.add(ch);
+                list.add(ch.getBrand());
             }
-           
-        }    
+
+        }
         return ManufacturerCar;
     }
 
@@ -245,6 +255,18 @@ public class SearchJPanel extends javax.swing.JPanel {
             }
         }
         return CertificateYear;
+    }
+
+    private void getLastUpdated() throws ParseException {
+        List<Date> date = new ArrayList();
+        DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.ENGLISH);
+        for (Car ch : history.getHistory()) {
+            Date date1 = format.parse(ch.getTime());
+            date.add(date1);
+        }
+        var last = Collections.max(date);
+        System.out.println(last);
+        txtTime.setText(last.toString());
     }
 
     /**
@@ -285,7 +307,13 @@ public class SearchJPanel extends javax.swing.JPanel {
         panecity = new javax.swing.JPanel();
         lblcity1 = new javax.swing.JLabel();
         txtcity1 = new javax.swing.JTextField();
+        paneTime = new javax.swing.JPanel();
+        txtTime = new javax.swing.JTextField();
+        lblTime = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(153, 153, 153));
+
+        dropdown.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         dropdown.setMaximumRowCount(15);
         dropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT.... ", "List all cars", "List all cars year", "List all the cars with seats", "find car with given serial number", "list cars model number", "list cars city", "list cars having expired certificate" }));
         dropdown.addActionListener(new java.awt.event.ActionListener() {
@@ -294,13 +322,15 @@ public class SearchJPanel extends javax.swing.JPanel {
             }
         });
 
-        dropdown2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT BRAND", "TOYOTA", "TELSA", "BMW", "BENZ", "FERRARI" }));
+        dropdown2.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        dropdown2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT BRAND", "TOYOTA", "TESLA", "BMW", "BENZ", "FERRARI" }));
         dropdown2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dropdown2ActionPerformed(evt);
             }
         });
 
+        dropdown3.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
         dropdown3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT YEAR..", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021" }));
         dropdown3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -308,22 +338,38 @@ public class SearchJPanel extends javax.swing.JPanel {
             }
         });
 
+        tblCar1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         tblCar1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
                 "Registration Date", "Availability", "Brand", "Manufacturing  Date", "City", "No of Seats", "Serial Number", "Model Number", "Certificate"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         table17.setViewportView(tblCar1);
 
-        btncheckavail.setText("Check Available Cars");
+        btncheckavail.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btncheckavail.setText("CHECK AVAILABLE CAR");
         btncheckavail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncheckavailActionPerformed(evt);
             }
         });
+
+        pane11.setBackground(new java.awt.Color(153, 153, 153));
 
         txtAvail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -331,8 +377,10 @@ public class SearchJPanel extends javax.swing.JPanel {
             }
         });
 
+        lblAvail.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblAvail.setText("Available");
 
+        lblNotAvail.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblNotAvail.setText("Not Available");
 
         javax.swing.GroupLayout pane11Layout = new javax.swing.GroupLayout(pane11);
@@ -365,27 +413,31 @@ public class SearchJPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnupdate.setText("Last Update");
+        btnupdate.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btnupdate.setText("LAST UPDATE");
         btnupdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnupdateActionPerformed(evt);
             }
         });
 
-        btnFirstAvail.setText("First Available Car");
+        btnFirstAvail.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btnFirstAvail.setText("FIRST AVAILALE CAR");
         btnFirstAvail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFirstAvailActionPerformed(evt);
             }
         });
 
-        btnManufacturers.setText("Manufacturers");
+        btnManufacturers.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btnManufacturers.setText("MANUFACTURERS");
         btnManufacturers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManufacturersActionPerformed(evt);
             }
         });
 
+        tblCar2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         tblCar2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
@@ -396,9 +448,20 @@ public class SearchJPanel extends javax.swing.JPanel {
             new String [] {
                 "Manufacturers"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         table18.setViewportView(tblCar2);
 
+        paneserial.setBackground(new java.awt.Color(153, 153, 153));
+
+        lblserial.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblserial.setText("ENTER SERIAL NUMBER");
 
         txtserial1.addActionListener(new java.awt.event.ActionListener() {
@@ -428,6 +491,9 @@ public class SearchJPanel extends javax.swing.JPanel {
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
+        panemodel.setBackground(new java.awt.Color(153, 153, 153));
+
+        lblmodel.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblmodel.setText("MODEL NAME");
 
         txtmodel1.addActionListener(new java.awt.event.ActionListener() {
@@ -443,9 +509,9 @@ public class SearchJPanel extends javax.swing.JPanel {
             .addGroup(panemodelLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(panemodelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtmodel1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblmodel))
-                .addContainerGap(39, Short.MAX_VALUE))
+                    .addComponent(lblmodel)
+                    .addComponent(txtmodel1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         panemodelLayout.setVerticalGroup(
             panemodelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -456,6 +522,8 @@ public class SearchJPanel extends javax.swing.JPanel {
                 .addComponent(txtmodel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(36, Short.MAX_VALUE))
         );
+
+        paneminmax.setBackground(new java.awt.Color(153, 153, 153));
 
         dropdown41.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MIN", "4", "5", "6", "7", "8", "9" }));
         dropdown41.addActionListener(new java.awt.event.ActionListener() {
@@ -471,6 +539,7 @@ public class SearchJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnsubmit.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
         btnsubmit.setText("SUBMIT");
         btnsubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -490,7 +559,7 @@ public class SearchJPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(dropdown4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(paneminmaxLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
+                        .addGap(28, 28, 28)
                         .addComponent(btnsubmit)))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
@@ -501,11 +570,14 @@ public class SearchJPanel extends javax.swing.JPanel {
                 .addGroup(paneminmaxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dropdown41, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dropdown4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnsubmit)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
+        panecity.setBackground(new java.awt.Color(153, 153, 153));
+
+        lblcity1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblcity1.setText("ENTER CITY NAME");
 
         txtcity1.addActionListener(new java.awt.event.ActionListener() {
@@ -520,7 +592,7 @@ public class SearchJPanel extends javax.swing.JPanel {
             panecityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panecityLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(panecityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(panecityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblcity1)
                     .addComponent(txtcity1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(33, Short.MAX_VALUE))
@@ -535,57 +607,96 @@ public class SearchJPanel extends javax.swing.JPanel {
                 .addContainerGap(44, Short.MAX_VALUE))
         );
 
+        paneTime.setBackground(new java.awt.Color(153, 153, 153));
+
+        txtTime.setText(" ");
+        txtTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimeActionPerformed(evt);
+            }
+        });
+
+        lblTime.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        lblTime.setText("LAST UPDATED TIME");
+
+        javax.swing.GroupLayout paneTimeLayout = new javax.swing.GroupLayout(paneTime);
+        paneTime.setLayout(paneTimeLayout);
+        paneTimeLayout.setHorizontalGroup(
+            paneTimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneTimeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(paneTimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTime)
+                    .addGroup(paneTimeLayout.createSequentialGroup()
+                        .addComponent(lblTime)
+                        .addGap(0, 221, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        paneTimeLayout.setVerticalGroup(
+            paneTimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneTimeLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(lblTime, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(42, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dropdown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(paneTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panecity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dropdown2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dropdown3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(paneserial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(paneminmax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panemodel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pane11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(table17, javax.swing.GroupLayout.PREFERRED_SIZE, 1101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(table18, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dropdown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnFirstAvail)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(14, 14, 14)
                                 .addComponent(btncheckavail)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnManufacturers)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnupdate))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(panecity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dropdown2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dropdown3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(paneserial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(paneminmax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(panemodel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(pane11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(table18, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(table17, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 1355, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnupdate)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnFirstAvail)
-                    .addComponent(btncheckavail)
-                    .addComponent(btnManufacturers)
-                    .addComponent(btnupdate))
-                .addGap(16, 16, 16)
+                    .addComponent(btnupdate, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFirstAvail, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btncheckavail, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnManufacturers, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(dropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panemodel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(paneminmax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -594,22 +705,19 @@ public class SearchJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(dropdown3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(dropdown2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(panecity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                    .addComponent(panecity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(paneTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(table17, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(table18, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(246, Short.MAX_VALUE))
+                    .addComponent(table18, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(table17, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void dropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropdownActionPerformed
-        
-        pane11.setVisible(false);
-        paneminmax.setVisible(false);
-        paneserial.setVisible(false);
-        panemodel.setVisible(false);
-        table18.setVisible(false);
+
+        setDefaultOptions();
         String selectedvalue = dropdown.getSelectedItem().toString();
 
         if (selectedvalue.equals("List all cars")) {
@@ -648,8 +756,8 @@ public class SearchJPanel extends javax.swing.JPanel {
         if (selectedvalue.equals("find car with given serial number")) {
 
             paneserial.setVisible(true);
-                    revalidate();
-        repaint();
+            revalidate();
+            repaint();
         }
 
         if (!selectedvalue.equals("find car with given serial number")) {
@@ -661,8 +769,8 @@ public class SearchJPanel extends javax.swing.JPanel {
         if (selectedvalue.equals("list cars model number")) {
 
             panemodel.setVisible(true);
-                    revalidate();
-        repaint();
+            revalidate();
+            repaint();
         }
 
         if (!selectedvalue.equals("list cars model number")) {
@@ -674,8 +782,8 @@ public class SearchJPanel extends javax.swing.JPanel {
         if (selectedvalue.equals("list cars city")) {
 
             panecity.setVisible(true);
-                    revalidate();
-                repaint();
+            revalidate();
+            repaint();
         }
 
         if (!selectedvalue.equals("list cars city")) {
@@ -689,8 +797,8 @@ public class SearchJPanel extends javax.swing.JPanel {
             getCertiYear();
             cartable8();
             table17.setVisible(true);
-           revalidate();
-        repaint();
+            revalidate();
+            repaint();
         }
 
         if (!selectedvalue.equals("list cars having expired certificate")) {
@@ -710,8 +818,8 @@ public class SearchJPanel extends javax.swing.JPanel {
         if (selectedvalue1.equals("SELECT...")) {
 
             table17.setVisible(true);
-                    revalidate();
-        repaint();
+            revalidate();
+            repaint();
         }
 
         getBrandName(selectedvalue1);
@@ -766,8 +874,8 @@ public class SearchJPanel extends javax.swing.JPanel {
             getSeats1(selectedvalue31, selectedvalue3);
             cartable3();
             table17.setVisible(true);
-        revalidate();
-        repaint();
+            revalidate();
+            repaint();
         }
     }//GEN-LAST:event_btnsubmitActionPerformed
 
@@ -792,19 +900,19 @@ public class SearchJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btncheckavailActionPerformed
 
-    
-    protected void setDefaultOptions(){
-      
+    protected void setDefaultOptions() {
+
         pane11.setVisible(false);
         table17.setVisible(false);
         paneminmax.setVisible(false);
         paneserial.setVisible(false);
         panemodel.setVisible(false);
-        table18.setVisible(false);  
+        table18.setVisible(false);
         dropdown2.setVisible(false);
         dropdown3.setVisible(false);
+        paneTime.setVisible(false);
     }
-    
+
     private void txtAvailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAvailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAvailActionPerformed
@@ -822,19 +930,13 @@ public class SearchJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_txtmodel1ActionPerformed
 
-    private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateActionPerformed
-        // TODO add your handling code here:
-
-
-    }//GEN-LAST:event_btnupdateActionPerformed
-
     private void btnFirstAvailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstAvailActionPerformed
         // TODO add your handling code here:
-       
+
         setDefaultOptions();
-        
+
         table17.setVisible(true);
-       
+
         revalidate();
         repaint();
         for (Car ch : history.getHistory()) {
@@ -850,7 +952,7 @@ public class SearchJPanel extends javax.swing.JPanel {
 
     private void btnManufacturersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManufacturersActionPerformed
         // TODO add your handling code here:
-     setDefaultOptions();
+        setDefaultOptions();
         table18.setVisible(true);
         revalidate();
         repaint();
@@ -877,6 +979,26 @@ public class SearchJPanel extends javax.swing.JPanel {
         repaint();
 
     }//GEN-LAST:event_txtcity1ActionPerformed
+
+    private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateActionPerformed
+
+     setDefaultOptions();
+     paneTime.setVisible(true);
+
+
+        try {
+            // TODO add your handling code here:
+            getLastUpdated();
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(SearchJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnupdateActionPerformed
+
+    private void txtTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimeActionPerformed
+        // TODO add your handling code here:
+        txtTime.setEditable(false);
+    }//GEN-LAST:event_txtTimeActionPerformed
 
     private void cartable1() {
         DefaultTableModel model = (DefaultTableModel) tblCar1.getModel();
@@ -1084,9 +1206,8 @@ public class SearchJPanel extends javax.swing.JPanel {
 
             row[0] = CAR.getBrand();
             list.add(CAR.getBrand());
-             model.addRow(row);
+            model.addRow(row);
         }
-       
 
     }
 
@@ -1104,10 +1225,12 @@ public class SearchJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> dropdown41;
     private javax.swing.JLabel lblAvail;
     private javax.swing.JLabel lblNotAvail;
+    private javax.swing.JLabel lblTime;
     private javax.swing.JLabel lblcity1;
     private javax.swing.JLabel lblmodel;
     private javax.swing.JLabel lblserial;
     private javax.swing.JPanel pane11;
+    private javax.swing.JPanel paneTime;
     private javax.swing.JPanel panecity;
     private javax.swing.JPanel paneminmax;
     private javax.swing.JPanel panemodel;
@@ -1118,6 +1241,7 @@ public class SearchJPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblCar2;
     private javax.swing.JTextField txtAvail;
     private javax.swing.JTextField txtNotAvail;
+    private javax.swing.JTextField txtTime;
     private javax.swing.JTextField txtcity1;
     private javax.swing.JTextField txtmodel1;
     private javax.swing.JTextField txtserial1;

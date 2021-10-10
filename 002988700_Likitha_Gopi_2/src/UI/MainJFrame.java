@@ -45,21 +45,26 @@ public class MainJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnCreate.setText("Create");
+        ControlPanel.setBackground(new java.awt.Color(153, 153, 153));
+
+        btnCreate.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnCreate.setText("CREATE");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCreateActionPerformed(evt);
             }
         });
 
-        btnView.setText("View");
+        btnView.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnView.setText("VIEW");
         btnView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnViewActionPerformed(evt);
             }
         });
 
-        btnSearch.setText("Search");
+        btnSearch.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnSearch.setText("SEARCH");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
@@ -70,13 +75,9 @@ public class MainJFrame extends javax.swing.JFrame {
         ControlPanel.setLayout(ControlPanelLayout);
         ControlPanelLayout.setHorizontalGroup(
             ControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ControlPanelLayout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
-                .addGroup(ControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCreate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnView, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+            .addComponent(btnCreate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
         ControlPanelLayout.setVerticalGroup(
             ControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,10 +88,12 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(btnView)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSearch)
-                .addContainerGap(592, Short.MAX_VALUE))
+                .addContainerGap(586, Short.MAX_VALUE))
         );
 
         SplitPane.setLeftComponent(ControlPanel);
+
+        WorkPanel.setBackground(new java.awt.Color(153, 153, 153));
 
         javax.swing.GroupLayout WorkPanelLayout = new javax.swing.GroupLayout(WorkPanel);
         WorkPanel.setLayout(WorkPanelLayout);
@@ -183,14 +186,14 @@ public class MainJFrame extends javax.swing.JFrame {
         Car CAR0 = history.addNewCar();
         CAR0.setRegistration_date("2/10/2012");
         CAR0.setOccupied("yes");
-        CAR0.setBrand("Tesla");
+        CAR0.setBrand("TESLA");
         CAR0.setYear(2010);
         CAR0.setCity("New York");
         CAR0.setSeats(4);
         CAR0.setSerial_number("TESLA98765");
         CAR0.setModel_number("TES12");
         CAR0.setCerti_year(2020);
-        
+        CAR0.setTime("14-07-2017 04:24:27");
         
         
         Car CAR = history.addNewCar();
@@ -203,6 +206,7 @@ public class MainJFrame extends javax.swing.JFrame {
         CAR.setSerial_number("TOY432");
         CAR.setModel_number("TOY12");
         CAR.setCerti_year(2022);
+        CAR.setTime("14-07-2017 04:24:27");
         
         Car CAR1 = history.addNewCar();
         CAR1.setRegistration_date("23/12/2014");
@@ -214,6 +218,7 @@ public class MainJFrame extends javax.swing.JFrame {
         CAR1.setSerial_number("BMW876");
         CAR1.setModel_number("BMW12");
         CAR1.setCerti_year(2020);
+        CAR1.setTime("14-07-2017 04:24:27");
         
         
         Car CAR3 = history.addNewCar();
@@ -226,6 +231,7 @@ public class MainJFrame extends javax.swing.JFrame {
         CAR3.setSerial_number("BEN432");
         CAR3.setModel_number("BEN12");
         CAR3.setCerti_year(2025);
+        CAR3.setTime("14-07-2017 04:24:27");
           
         
         Car CAR4 = history.addNewCar();
@@ -238,6 +244,7 @@ public class MainJFrame extends javax.swing.JFrame {
         CAR4.setSerial_number("BEN432");
         CAR4.setModel_number("FER12");
         CAR4.setCerti_year(2019);
+        CAR4.setTime("14-07-2020 04:24:27");
           
     }
     

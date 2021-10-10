@@ -57,6 +57,8 @@ public class CreateJPanel extends javax.swing.JPanel {
         lblCity = new javax.swing.JLabel();
         txtCity = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(153, 153, 153));
+
         lblCreate.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         lblCreate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCreate.setText("CREATE CAR DETAILS:");
@@ -175,16 +177,16 @@ public class CreateJPanel extends javax.swing.JPanel {
                                     .addComponent(txtSeats, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)))
                             .addComponent(lblBrand)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
+                        .addGap(28, 28, 28)
                         .addComponent(lblCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(73, 73, 73)
+                .addGap(47, 47, 47)
                 .addComponent(lblCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRegister)
                     .addComponent(txtRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))

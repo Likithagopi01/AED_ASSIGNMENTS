@@ -5,12 +5,14 @@
  */
 package UI;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Car;
 import model.CarHistory;
-
 
 /**
  *
@@ -21,17 +23,15 @@ public class ViewJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ViewJPanel
      */
-    
     CarHistory history;
-   
+
     public ViewJPanel(CarHistory history) {
         initComponents();
-        this.history= history;
-               
-        
+        this.history = history;
+
         paneUpdate.setVisible(false);
         paneView.setVisible(false);
-        
+
         populateTable();
     }
 
@@ -67,6 +67,8 @@ public class ViewJPanel extends javax.swing.JPanel {
         lblModel = new javax.swing.JLabel();
         txtModel = new javax.swing.JTextField();
         btnSubmit = new javax.swing.JButton();
+        lblCertificate = new javax.swing.JLabel();
+        txtCertificate = new javax.swing.JTextField();
         btnview = new javax.swing.JButton();
         paneView = new javax.swing.JPanel();
         lblRegister2 = new javax.swing.JLabel();
@@ -88,13 +90,19 @@ public class ViewJPanel extends javax.swing.JPanel {
         lblCertificate2 = new javax.swing.JLabel();
         txtCertificate2 = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(153, 153, 153));
+
         lblView.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         lblView.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblView.setText("VIEW CAR DETAILS:");
 
         tblCar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
                 "Registration Date", "Availability", "Brand", "Manufacturing  Date", "City", "No of Seats", "Serial Number", "Model Number", "Certificate"
@@ -102,6 +110,7 @@ public class ViewJPanel extends javax.swing.JPanel {
         ));
         table.setViewportView(tblCar);
 
+        btnDelete.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnDelete.setText("DELETE");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,12 +118,15 @@ public class ViewJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnUpdate.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btnUpdate.setText("UPDATE");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateActionPerformed(evt);
             }
         });
+
+        paneUpdate.setBackground(new java.awt.Color(153, 153, 153));
 
         lblRegister.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblRegister.setText("Registration Date");
@@ -190,10 +202,17 @@ public class ViewJPanel extends javax.swing.JPanel {
             }
         });
 
+        lblCertificate.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblCertificate.setText("Certificate");
+
         javax.swing.GroupLayout paneUpdateLayout = new javax.swing.GroupLayout(paneUpdate);
         paneUpdate.setLayout(paneUpdateLayout);
         paneUpdateLayout.setHorizontalGroup(
             paneUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneUpdateLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSubmit)
+                .addGap(189, 189, 189))
             .addGroup(paneUpdateLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addGroup(paneUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,22 +229,20 @@ public class ViewJPanel extends javax.swing.JPanel {
                             .addComponent(txtCity)
                             .addComponent(txtRegister)
                             .addComponent(txtBrand, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblBrand)
                     .addGroup(paneUpdateLayout.createSequentialGroup()
                         .addGroup(paneUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblSeats)
                             .addComponent(lblSerial)
-                            .addComponent(lblModel))
+                            .addComponent(lblModel)
+                            .addComponent(lblCertificate))
                         .addGap(57, 57, 57)
                         .addGroup(paneUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCertificate)
                             .addComponent(txtSerial)
                             .addComponent(txtModel)
-                            .addComponent(txtSeats, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(lblBrand))
-                .addContainerGap(80, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneUpdateLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSubmit)
-                .addGap(185, 185, 185))
+                            .addComponent(txtSeats, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         paneUpdateLayout.setVerticalGroup(
             paneUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,16 +282,23 @@ public class ViewJPanel extends javax.swing.JPanel {
                     .addComponent(lblModel)
                     .addComponent(txtModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(paneUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCertificate)
+                    .addComponent(txtCertificate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(btnSubmit)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addGap(42, 42, 42))
         );
 
-        btnview.setText("View");
+        btnview.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnview.setText("VIEW");
         btnview.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnviewActionPerformed(evt);
             }
         });
+
+        paneView.setBackground(new java.awt.Color(153, 153, 153));
 
         lblRegister2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblRegister2.setText("Registration Date");
@@ -437,8 +461,8 @@ public class ViewJPanel extends javax.swing.JPanel {
             .addComponent(table)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnview)
-                .addGap(41, 41, 41)
+                .addComponent(btnview, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49)
                 .addComponent(btnUpdate)
                 .addGap(30, 30, 30)
                 .addComponent(btnDelete)
@@ -448,7 +472,7 @@ public class ViewJPanel extends javax.swing.JPanel {
                 .addComponent(paneUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(paneView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -459,65 +483,63 @@ public class ViewJPanel extends javax.swing.JPanel {
                 .addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnview)
                     .addComponent(btnUpdate)
-                    .addComponent(btnDelete))
+                    .addComponent(btnDelete)
+                    .addComponent(btnview))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(paneUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(paneView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(709, Short.MAX_VALUE))
+                    .addComponent(paneView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(paneUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(676, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-        
-         int  selectedRowIndex = tblCar.getSelectedRow();
-         
-         if(selectedRowIndex<0) {
-             JOptionPane.showMessageDialog(this, "Please select a row to delete.");
-             return;
-         }
-         
-         DefaultTableModel model = (DefaultTableModel)tblCar.getModel();
-         Car selectedCar = (Car)model.getValueAt(selectedRowIndex , 0);
-         
-         history.deleteCar(selectedCar);
-         
-         JOptionPane.showMessageDialog(this, "Car Details Deleted.");
-         
-         populateTable();
+
+        int selectedRowIndex = tblCar.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to delete.");
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) tblCar.getModel();
+        Car selectedCar = (Car) model.getValueAt(selectedRowIndex, 0);
+
+        history.deleteCar(selectedCar);
+
+        JOptionPane.showMessageDialog(this, "Car Details Deleted.");
+
+        populateTable();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        
-        
-        
-        int  selectedRowIndex = tblCar.getSelectedRow();
-        
-         if(selectedRowIndex<0) {
-         JOptionPane.showMessageDialog(this, "Please select a row to Update.");
-         return;
-         }
-         
-         paneView.setVisible(false);
-         paneUpdate.setVisible(true);
-         
-         DefaultTableModel model = (DefaultTableModel)tblCar.getModel();
-         Car selectedCar = (Car)model.getValueAt(selectedRowIndex , 0);
-         
 
-         txtRegister.setText(String.valueOf(selectedCar.getRegistration_date()));
-         txtBrand.setText(String.valueOf(selectedCar.getBrand()));
-         txtYear.setText(String.valueOf(selectedCar.getYear()));
-         txtCity.setText(String.valueOf(selectedCar.getCity()));
-         txtSeats.setText(String.valueOf(selectedCar.getSeats()));
-         txtSerial.setText(String.valueOf(selectedCar.getSerial_number()));
-         txtModel.setText(String.valueOf(selectedCar.getModel_number()));
-         
-         
+        int selectedRowIndex = tblCar.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to Update.");
+            return;
+        }
+
+        paneView.setVisible(false);
+        paneUpdate.setVisible(true);
+
+        DefaultTableModel model = (DefaultTableModel) tblCar.getModel();
+        Car selectedCar = (Car) model.getValueAt(selectedRowIndex, 0);
+
+        txtRegister.setText(String.valueOf(selectedCar.getRegistration_date()));
+        txtBrand.setText(String.valueOf(selectedCar.getBrand()));
+        txtYear.setText(String.valueOf(selectedCar.getYear()));
+        txtCity.setText(String.valueOf(selectedCar.getCity()));
+        txtSeats.setText(String.valueOf(selectedCar.getSeats()));
+        txtSerial.setText(String.valueOf(selectedCar.getSerial_number()));
+        txtModel.setText(String.valueOf(selectedCar.getModel_number()));
+        txtCertificate.setText(String.valueOf(selectedCar.getCerti_year()));
+
+
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void txtRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRegisterActionPerformed
@@ -550,40 +572,40 @@ public class ViewJPanel extends javax.swing.JPanel {
 
     private void btnviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnviewActionPerformed
         // TODO add your handling code here:
-        
-        int  selectedRowIndex = tblCar.getSelectedRow();
-        
-         if(selectedRowIndex<0) {
-         JOptionPane.showMessageDialog(this, "Please select a row to View.");
-         return;
-         }
-         paneUpdate.setVisible(false);
-         paneView.setVisible(true);
-         
-         DefaultTableModel model = (DefaultTableModel)tblCar.getModel();
-         Car selectedCar = (Car)model.getValueAt(selectedRowIndex , 0);
-         
-         chkAvailability2.setText(String.valueOf(selectedCar.getOccupied()));
-         txtRegister2.setText(String.valueOf(selectedCar.getRegistration_date()));
-         txtBrand2.setText(String.valueOf(selectedCar.getBrand()));
-         txtYear2.setText(String.valueOf(selectedCar.getYear()));
-         txtCity2.setText(String.valueOf(selectedCar.getCity()));
-         txtSeats2.setText(String.valueOf(selectedCar.getSeats()));
-         txtSerial2.setText(String.valueOf(selectedCar.getSerial_number()));
-         txtModel2.setText(String.valueOf(selectedCar.getModel_number()));
-         txtCertificate2.setText(String.valueOf(selectedCar.getCerti_year()));
-                   
+
+        int selectedRowIndex = tblCar.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to View.");
+            return;
+        }
+        paneUpdate.setVisible(false);
+        paneView.setVisible(true);
+
+        DefaultTableModel model = (DefaultTableModel) tblCar.getModel();
+        Car selectedCar = (Car) model.getValueAt(selectedRowIndex, 0);
+
+        chkAvailability2.setText(String.valueOf(selectedCar.getOccupied()));
+        txtRegister2.setText(String.valueOf(selectedCar.getRegistration_date()));
+        txtBrand2.setText(String.valueOf(selectedCar.getBrand()));
+        txtYear2.setText(String.valueOf(selectedCar.getYear()));
+        txtCity2.setText(String.valueOf(selectedCar.getCity()));
+        txtSeats2.setText(String.valueOf(selectedCar.getSeats()));
+        txtSerial2.setText(String.valueOf(selectedCar.getSerial_number()));
+        txtModel2.setText(String.valueOf(selectedCar.getModel_number()));
+        txtCertificate2.setText(String.valueOf(selectedCar.getCerti_year()));
+
     }//GEN-LAST:event_btnviewActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
-        
-        int  selectedRowIndex = tblCar.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel)tblCar.getModel();
-        Car selectedCar = (Car)model.getValueAt(selectedRowIndex , 0);
+
+        int selectedRowIndex = tblCar.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) tblCar.getModel();
+        Car selectedCar = (Car) model.getValueAt(selectedRowIndex, 0);
         Update(selectedCar);
         paneUpdate.setVisible(false);
-        
+
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void txtRegister2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRegister2ActionPerformed
@@ -624,6 +646,7 @@ public class ViewJPanel extends javax.swing.JPanel {
     private javax.swing.JCheckBox chkAvailability2;
     private javax.swing.JLabel lblBrand;
     private javax.swing.JLabel lblBrand2;
+    private javax.swing.JLabel lblCertificate;
     private javax.swing.JLabel lblCertificate2;
     private javax.swing.JLabel lblCity;
     private javax.swing.JLabel lblCity2;
@@ -646,6 +669,7 @@ public class ViewJPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblCar;
     private javax.swing.JTextField txtBrand;
     private javax.swing.JTextField txtBrand2;
+    private javax.swing.JTextField txtCertificate;
     private javax.swing.JTextField txtCertificate2;
     private javax.swing.JTextField txtCity;
     private javax.swing.JTextField txtCity2;
@@ -661,34 +685,33 @@ public class ViewJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtYear2;
     // End of variables declaration//GEN-END:variables
 
-     
-    
-     private void Update(Car ch){
-    
-      ch.setRegistration_date(txtRegister.getText());
-      ch.setBrand(txtBrand.getText());
-      ch.setYear(Integer.parseInt(txtYear.getText()));
-      ch.setSerial_number(txtSerial.getText());
-      ch.setSeats(Integer.parseInt(txtSeats.getText()));
-      ch.setModel_number(txtModel.getText());
-      ch.setCity(txtCity.getText());
-      
-      populateTable();
-      
-    }
-    
-    
-    
-    
-    private void populateTable() {
-        DefaultTableModel model = (DefaultTableModel)tblCar.getModel();
+    private void Update(Car ch) {
         
+        Date currentTime = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String dateTime = dateFormat.format(currentTime);
+        ch.setRegistration_date(txtRegister.getText());
+        ch.setBrand(txtBrand.getText());
+        ch.setYear(Integer.parseInt(txtYear.getText()));
+        ch.setSerial_number(txtSerial.getText());
+        ch.setSeats(Integer.parseInt(txtSeats.getText()));
+        ch.setModel_number(txtModel.getText());
+        ch.setCity(txtCity.getText());
+        ch.setCerti_year(Integer.parseInt(txtCertificate.getText()));
+        ch.setTime(dateTime);
+        populateTable();
+
+    }
+
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) tblCar.getModel();
+
         model.setRowCount(0);
 //      System.out.println("size"+ history.getHistory().size());
-        
-        for(Car CAR : history.getHistory()){
-        
-        Object[] row = new Object[10];
+
+        for (Car CAR : history.getHistory()) {
+
+            Object[] row = new Object[10];
             row[0] = CAR;
             row[1] = CAR.getOccupied();
             row[2] = CAR.getBrand();
@@ -698,11 +721,10 @@ public class ViewJPanel extends javax.swing.JPanel {
             row[6] = CAR.getSerial_number();
             row[7] = CAR.getModel_number();
             row[8] = CAR.getCerti_year();
-        
-        
-        model.addRow(row);
-       
+
+            model.addRow(row);
+
         }
     }
-      
+
 }

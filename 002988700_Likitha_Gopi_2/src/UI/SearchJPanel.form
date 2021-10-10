@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <Properties>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="99" green="99" red="99" type="rgb"/>
+    </Property>
+  </Properties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -18,41 +23,45 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="dropdown" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Component id="paneTime" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="panecity" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="dropdown2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="dropdown3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="paneserial" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="paneminmax" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="panemodel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="pane11" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="table17" min="-2" pref="1101" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="table18" min="-2" pref="161" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="dropdown" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="btnFirstAvail" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                               <Component id="btncheckavail" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="btnManufacturers" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="btnupdate" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="panecity" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="dropdown2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="dropdown3" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="paneserial" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="paneminmax" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="panemodel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="pane11" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                              <Component id="table18" min="-2" pref="275" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="table17" min="-2" pref="755" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="1355" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -62,16 +71,16 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnFirstAvail" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btncheckavail" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnManufacturers" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnupdate" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnupdate" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="btnFirstAvail" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="btncheckavail" alignment="0" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="btnManufacturers" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="dropdown" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="panemodel" min="-2" max="-2" attributes="0"/>
                   <Component id="paneminmax" min="-2" max="-2" attributes="0"/>
@@ -82,13 +91,14 @@
                       <Component id="dropdown2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="panecity" min="-2" max="-2" attributes="0"/>
+                  <Component id="paneTime" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="23" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="table17" min="-2" pref="118" max="-2" attributes="0"/>
                   <Component id="table18" min="-2" pref="91" max="-2" attributes="0"/>
+                  <Component id="table17" min="-2" pref="111" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="246" max="32767" attributes="0"/>
+              <EmptySpace pref="62" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -96,6 +106,9 @@
   <SubComponents>
     <Component class="javax.swing.JComboBox" name="dropdown">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Times New Roman" size="14" style="1"/>
+        </Property>
         <Property name="maximumRowCount" type="int" value="15"/>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="8">
@@ -119,11 +132,14 @@
     </Component>
     <Component class="javax.swing.JComboBox" name="dropdown2">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Times New Roman" size="11" style="1"/>
+        </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="6">
             <StringItem index="0" value="SELECT BRAND"/>
             <StringItem index="1" value="TOYOTA"/>
-            <StringItem index="2" value="TELSA"/>
+            <StringItem index="2" value="TESLA"/>
             <StringItem index="3" value="BMW"/>
             <StringItem index="4" value="BENZ"/>
             <StringItem index="5" value="FERRARI"/>
@@ -139,6 +155,9 @@
     </Component>
     <Component class="javax.swing.JComboBox" name="dropdown3">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Times New Roman" size="11" style="1"/>
+        </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="13">
             <StringItem index="0" value="SELECT YEAR.."/>
@@ -173,17 +192,20 @@
       <SubComponents>
         <Component class="javax.swing.JTable" name="tblCar1">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="14" style="0"/>
+            </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="9" rowCount="0">
-                <Column editable="true" title="Registration Date" type="java.lang.Object"/>
-                <Column editable="true" title="Availability" type="java.lang.Object"/>
-                <Column editable="true" title="Brand" type="java.lang.Object"/>
-                <Column editable="true" title="Manufacturing  Date" type="java.lang.Object"/>
-                <Column editable="true" title="City" type="java.lang.Object"/>
-                <Column editable="true" title="No of Seats" type="java.lang.Object"/>
-                <Column editable="true" title="Serial Number" type="java.lang.Object"/>
-                <Column editable="true" title="Model Number" type="java.lang.Object"/>
-                <Column editable="true" title="Certificate" type="java.lang.Object"/>
+              <Table columnCount="9" rowCount="5">
+                <Column editable="false" title="Registration Date" type="java.lang.Object"/>
+                <Column editable="false" title="Availability" type="java.lang.Object"/>
+                <Column editable="false" title="Brand" type="java.lang.Object"/>
+                <Column editable="false" title="Manufacturing  Date" type="java.lang.Object"/>
+                <Column editable="false" title="City" type="java.lang.Object"/>
+                <Column editable="false" title="No of Seats" type="java.lang.Object"/>
+                <Column editable="false" title="Serial Number" type="java.lang.Object"/>
+                <Column editable="false" title="Model Number" type="java.lang.Object"/>
+                <Column editable="false" title="Certificate" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -244,13 +266,21 @@
     </Container>
     <Component class="javax.swing.JButton" name="btncheckavail">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Check Available Cars"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Times New Roman" size="12" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="CHECK AVAILABLE CAR"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btncheckavailActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="pane11">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="99" green="99" red="99" type="rgb"/>
+        </Property>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -298,6 +328,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblAvail">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Available"/>
           </Properties>
         </Component>
@@ -305,6 +338,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblNotAvail">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Not Available"/>
           </Properties>
         </Component>
@@ -312,7 +348,10 @@
     </Container>
     <Component class="javax.swing.JButton" name="btnupdate">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Last Update"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Times New Roman" size="12" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="LAST UPDATE"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnupdateActionPerformed"/>
@@ -320,7 +359,10 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnFirstAvail">
       <Properties>
-        <Property name="text" type="java.lang.String" value="First Available Car"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Times New Roman" size="12" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="FIRST AVAILALE CAR"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFirstAvailActionPerformed"/>
@@ -328,7 +370,10 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnManufacturers">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Manufacturers"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Times New Roman" size="12" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="MANUFACTURERS"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManufacturersActionPerformed"/>
@@ -343,9 +388,12 @@
       <SubComponents>
         <Component class="javax.swing.JTable" name="tblCar2">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="14" style="0"/>
+            </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="1" rowCount="4">
-                <Column editable="true" title="Manufacturers" type="java.lang.Object"/>
+                <Column editable="false" title="Manufacturers" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -365,6 +413,11 @@
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="paneserial">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="99" green="99" red="99" type="rgb"/>
+        </Property>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -394,6 +447,9 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="lblserial">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="ENTER SERIAL NUMBER"/>
           </Properties>
         </Component>
@@ -405,6 +461,11 @@
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="panemodel">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="99" green="99" red="99" type="rgb"/>
+        </Property>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -412,10 +473,10 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="txtmodel1" min="-2" pref="95" max="-2" attributes="0"/>
                       <Component id="lblmodel" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtmodel1" min="-2" pref="95" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="39" max="32767" attributes="0"/>
+                  <EmptySpace pref="41" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -434,6 +495,9 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="lblmodel">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="MODEL NAME"/>
           </Properties>
         </Component>
@@ -445,20 +509,25 @@
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="paneminmax">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="99" green="99" red="99" type="rgb"/>
+        </Property>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="dropdown41" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="dropdown4" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           <Component id="btnsubmit" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -474,9 +543,9 @@
                       <Component id="dropdown41" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="dropdown4" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnsubmit" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="34" max="32767" attributes="0"/>
+                  <EmptySpace pref="22" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -526,6 +595,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnsubmit">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="11" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="SUBMIT"/>
           </Properties>
           <Events>
@@ -535,13 +607,18 @@
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="panecity">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="99" green="99" red="99" type="rgb"/>
+        </Property>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lblcity1" min="-2" max="-2" attributes="0"/>
                       <Component id="txtcity1" min="-2" pref="95" max="-2" attributes="0"/>
                   </Group>
@@ -564,6 +641,9 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="lblcity1">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="ENTER CITY NAME"/>
           </Properties>
         </Component>
@@ -571,6 +651,60 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtcity1ActionPerformed"/>
           </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="paneTime">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="99" green="99" red="99" type="rgb"/>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="txtTime" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="lblTime" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="221" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Component id="lblTime" min="-2" pref="15" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="txtTime" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="42" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JTextField" name="txtTime">
+          <Properties>
+            <Property name="text" type="java.lang.String" value=" "/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTimeActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblTime">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="LAST UPDATED TIME"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

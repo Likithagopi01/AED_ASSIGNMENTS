@@ -38,6 +38,11 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout"/>
       <SubComponents>
         <Container class="javax.swing.JPanel" name="ControlPanel">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="99" red="99" type="rgb"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
               <JSplitPaneConstraints position="left"/>
@@ -47,15 +52,9 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace pref="17" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnCreate" alignment="1" min="-2" pref="73" max="-2" attributes="0"/>
-                          <Component id="btnView" alignment="1" min="-2" pref="73" max="-2" attributes="0"/>
-                          <Component id="btnSearch" alignment="1" min="-2" pref="73" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="btnCreate" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnView" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnSearch" alignment="0" pref="100" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -67,7 +66,7 @@
                       <Component id="btnView" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnSearch" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="592" max="32767" attributes="0"/>
+                      <EmptySpace pref="586" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -75,7 +74,10 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="btnCreate">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Create"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="14" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="CREATE"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCreateActionPerformed"/>
@@ -83,7 +85,10 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnView">
               <Properties>
-                <Property name="text" type="java.lang.String" value="View"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="14" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="VIEW"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnViewActionPerformed"/>
@@ -91,7 +96,10 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnSearch">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Search"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="14" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="SEARCH"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchActionPerformed"/>
@@ -100,6 +108,11 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="WorkPanel">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="99" red="99" type="rgb"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
               <JSplitPaneConstraints position="right"/>

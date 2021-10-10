@@ -19,10 +19,19 @@ public class Car {
    private String serial_number;
    private String model_number;
    private int certi_year;
+   private String time;
 
    
     public String getRegistration_date() {
         return registration_date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public void setRegistration_date(String registration_date) {
