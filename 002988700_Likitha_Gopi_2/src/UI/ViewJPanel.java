@@ -49,6 +49,26 @@ public class ViewJPanel extends javax.swing.JPanel {
         tblCar = new javax.swing.JTable();
         btnDelete = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
+        btnview = new javax.swing.JButton();
+        paneView = new javax.swing.JPanel();
+        lblRegister2 = new javax.swing.JLabel();
+        txtRegister2 = new javax.swing.JTextField();
+        lblOccupy2 = new javax.swing.JLabel();
+        lblBrand2 = new javax.swing.JLabel();
+        txtBrand2 = new javax.swing.JTextField();
+        lblYear2 = new javax.swing.JLabel();
+        txtYear2 = new javax.swing.JTextField();
+        lblCity2 = new javax.swing.JLabel();
+        txtCity2 = new javax.swing.JTextField();
+        lblSeats2 = new javax.swing.JLabel();
+        txtSeats2 = new javax.swing.JTextField();
+        lblSerial2 = new javax.swing.JLabel();
+        txtSerial2 = new javax.swing.JTextField();
+        lblModel2 = new javax.swing.JLabel();
+        txtModel2 = new javax.swing.JTextField();
+        lblCertificate2 = new javax.swing.JLabel();
+        txtCertificate2 = new javax.swing.JTextField();
+        chkAvailability2 = new javax.swing.JCheckBox();
         paneUpdate = new javax.swing.JPanel();
         lblRegister = new javax.swing.JLabel();
         txtRegister = new javax.swing.JTextField();
@@ -69,26 +89,6 @@ public class ViewJPanel extends javax.swing.JPanel {
         btnSubmit = new javax.swing.JButton();
         lblCertificate = new javax.swing.JLabel();
         txtCertificate = new javax.swing.JTextField();
-        btnview = new javax.swing.JButton();
-        paneView = new javax.swing.JPanel();
-        lblRegister2 = new javax.swing.JLabel();
-        txtRegister2 = new javax.swing.JTextField();
-        lblOccupy2 = new javax.swing.JLabel();
-        chkAvailability2 = new javax.swing.JCheckBox();
-        lblBrand2 = new javax.swing.JLabel();
-        txtBrand2 = new javax.swing.JTextField();
-        lblYear2 = new javax.swing.JLabel();
-        txtYear2 = new javax.swing.JTextField();
-        lblCity2 = new javax.swing.JLabel();
-        txtCity2 = new javax.swing.JTextField();
-        lblSeats2 = new javax.swing.JLabel();
-        txtSeats2 = new javax.swing.JTextField();
-        lblSerial2 = new javax.swing.JLabel();
-        txtSerial2 = new javax.swing.JTextField();
-        lblModel2 = new javax.swing.JLabel();
-        txtModel2 = new javax.swing.JTextField();
-        lblCertificate2 = new javax.swing.JLabel();
-        txtCertificate2 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(153, 153, 153));
 
@@ -111,6 +111,7 @@ public class ViewJPanel extends javax.swing.JPanel {
         table.setViewportView(tblCar);
 
         btnDelete.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(255, 0, 0));
         btnDelete.setText("DELETE");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,13 +119,171 @@ public class ViewJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnUpdate.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btnUpdate.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnUpdate.setText("UPDATE");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateActionPerformed(evt);
             }
         });
+
+        btnview.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnview.setText("VIEW");
+        btnview.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnviewActionPerformed(evt);
+            }
+        });
+
+        paneView.setBackground(new java.awt.Color(153, 153, 153));
+
+        lblRegister2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblRegister2.setText("Registration Date");
+
+        txtRegister2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRegister2ActionPerformed(evt);
+            }
+        });
+
+        lblOccupy2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblOccupy2.setText("Occupied");
+
+        lblBrand2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblBrand2.setText("Brand");
+
+        txtBrand2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBrand2ActionPerformed(evt);
+            }
+        });
+
+        lblYear2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblYear2.setText("Manufacture Year");
+
+        txtYear2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtYear2ActionPerformed(evt);
+            }
+        });
+
+        lblCity2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblCity2.setText("City");
+
+        txtCity2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCity2ActionPerformed(evt);
+            }
+        });
+
+        lblSeats2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblSeats2.setText("No of Seats");
+
+        txtSeats2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSeats2ActionPerformed(evt);
+            }
+        });
+
+        lblSerial2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblSerial2.setText("Serial Number");
+
+        lblModel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblModel2.setText("Model Number");
+
+        txtModel2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtModel2ActionPerformed(evt);
+            }
+        });
+
+        lblCertificate2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblCertificate2.setText("Certificate");
+
+        chkAvailability2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkAvailability2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout paneViewLayout = new javax.swing.GroupLayout(paneView);
+        paneView.setLayout(paneViewLayout);
+        paneViewLayout.setHorizontalGroup(
+            paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneViewLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(paneViewLayout.createSequentialGroup()
+                        .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblOccupy2)
+                            .addComponent(lblYear2)
+                            .addComponent(lblRegister2)
+                            .addComponent(lblCity2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
+                        .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtYear2)
+                            .addComponent(txtCity2)
+                            .addComponent(txtRegister2)
+                            .addComponent(txtBrand2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chkAvailability2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(paneViewLayout.createSequentialGroup()
+                        .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSeats2)
+                            .addComponent(lblSerial2)
+                            .addComponent(lblModel2)
+                            .addComponent(lblCertificate2))
+                        .addGap(57, 57, 57)
+                        .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtSerial2)
+                            .addComponent(txtModel2)
+                            .addComponent(txtCertificate2)
+                            .addComponent(txtSeats2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblBrand2))
+                .addContainerGap(106, Short.MAX_VALUE))
+        );
+        paneViewLayout.setVerticalGroup(
+            paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneViewLayout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRegister2)
+                    .addComponent(txtRegister2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblOccupy2)
+                    .addComponent(chkAvailability2))
+                .addGap(17, 17, 17)
+                .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblBrand2)
+                    .addComponent(txtBrand2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblYear2)
+                    .addComponent(txtYear2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtCity2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(paneViewLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(lblCity2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(16, 16, 16)
+                .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSeats2)
+                    .addComponent(txtSeats2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSerial2)
+                    .addComponent(txtSerial2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblModel2)
+                    .addComponent(txtModel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCertificate2)
+                    .addComponent(txtCertificate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
 
         paneUpdate.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -140,7 +299,6 @@ public class ViewJPanel extends javax.swing.JPanel {
         lblOccupy.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblOccupy.setText("Occupied");
 
-        chkAvailability.setText("Yes");
         chkAvailability.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chkAvailabilityActionPerformed(evt);
@@ -209,12 +367,8 @@ public class ViewJPanel extends javax.swing.JPanel {
         paneUpdate.setLayout(paneUpdateLayout);
         paneUpdateLayout.setHorizontalGroup(
             paneUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneUpdateLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSubmit)
-                .addGap(189, 189, 189))
             .addGroup(paneUpdateLayout.createSequentialGroup()
-                .addGap(51, 51, 51)
+                .addGap(5, 5, 5)
                 .addGroup(paneUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(paneUpdateLayout.createSequentialGroup()
                         .addGroup(paneUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,10 +379,10 @@ public class ViewJPanel extends javax.swing.JPanel {
                         .addGap(36, 36, 36)
                         .addGroup(paneUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtYear)
-                            .addComponent(chkAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtCity)
                             .addComponent(txtRegister)
-                            .addComponent(txtBrand, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtBrand, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chkAvailability, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(lblBrand)
                     .addGroup(paneUpdateLayout.createSequentialGroup()
                         .addGroup(paneUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,11 +391,13 @@ public class ViewJPanel extends javax.swing.JPanel {
                             .addComponent(lblModel)
                             .addComponent(lblCertificate))
                         .addGap(57, 57, 57)
-                        .addGroup(paneUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCertificate)
-                            .addComponent(txtSerial)
-                            .addComponent(txtModel)
-                            .addComponent(txtSeats, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))))
+                        .addGroup(paneUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSubmit)
+                            .addGroup(paneUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtCertificate)
+                                .addComponent(txtSerial)
+                                .addComponent(txtModel)
+                                .addComponent(txtSeats, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         paneUpdateLayout.setVerticalGroup(
@@ -285,172 +441,9 @@ public class ViewJPanel extends javax.swing.JPanel {
                 .addGroup(paneUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCertificate)
                     .addComponent(txtCertificate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSubmit)
-                .addGap(42, 42, 42))
-        );
-
-        btnview.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnview.setText("VIEW");
-        btnview.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnviewActionPerformed(evt);
-            }
-        });
-
-        paneView.setBackground(new java.awt.Color(153, 153, 153));
-
-        lblRegister2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblRegister2.setText("Registration Date");
-
-        txtRegister2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRegister2ActionPerformed(evt);
-            }
-        });
-
-        lblOccupy2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblOccupy2.setText("Occupied");
-
-        chkAvailability2.setText("Yes");
-        chkAvailability2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkAvailability2ActionPerformed(evt);
-            }
-        });
-
-        lblBrand2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblBrand2.setText("Brand");
-
-        txtBrand2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBrand2ActionPerformed(evt);
-            }
-        });
-
-        lblYear2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblYear2.setText("Manufacture Year");
-
-        txtYear2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtYear2ActionPerformed(evt);
-            }
-        });
-
-        lblCity2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblCity2.setText("City");
-
-        txtCity2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCity2ActionPerformed(evt);
-            }
-        });
-
-        lblSeats2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblSeats2.setText("No of Seats");
-
-        txtSeats2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSeats2ActionPerformed(evt);
-            }
-        });
-
-        lblSerial2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblSerial2.setText("Serial Number");
-
-        lblModel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblModel2.setText("Model Number");
-
-        txtModel2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtModel2ActionPerformed(evt);
-            }
-        });
-
-        lblCertificate2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblCertificate2.setText("Certificate");
-
-        javax.swing.GroupLayout paneViewLayout = new javax.swing.GroupLayout(paneView);
-        paneView.setLayout(paneViewLayout);
-        paneViewLayout.setHorizontalGroup(
-            paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 489, Short.MAX_VALUE)
-            .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(paneViewLayout.createSequentialGroup()
-                    .addGap(19, 19, 19)
-                    .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(paneViewLayout.createSequentialGroup()
-                            .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblOccupy2)
-                                .addComponent(lblYear2)
-                                .addComponent(lblRegister2)
-                                .addComponent(lblCity2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(36, 36, 36)
-                            .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtYear2)
-                                .addComponent(chkAvailability2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtCity2)
-                                .addComponent(txtRegister2)
-                                .addComponent(txtBrand2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(paneViewLayout.createSequentialGroup()
-                            .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblSeats2)
-                                .addComponent(lblSerial2)
-                                .addComponent(lblModel2)
-                                .addComponent(lblCertificate2))
-                            .addGap(57, 57, 57)
-                            .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtSerial2)
-                                .addComponent(txtModel2)
-                                .addComponent(txtCertificate2)
-                                .addComponent(txtSeats2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(lblBrand2))
-                    .addContainerGap(112, Short.MAX_VALUE)))
-        );
-        paneViewLayout.setVerticalGroup(
-            paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 369, Short.MAX_VALUE)
-            .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(paneViewLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblRegister2)
-                        .addComponent(txtRegister2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(13, 13, 13)
-                    .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(chkAvailability2)
-                        .addComponent(lblOccupy2))
-                    .addGap(15, 15, 15)
-                    .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblBrand2)
-                        .addComponent(txtBrand2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(15, 15, 15)
-                    .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblYear2)
-                        .addComponent(txtYear2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(15, 15, 15)
-                    .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtCity2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(paneViewLayout.createSequentialGroup()
-                            .addGap(1, 1, 1)
-                            .addComponent(lblCity2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(16, 16, 16)
-                    .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblSeats2)
-                        .addComponent(txtSeats2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(15, 15, 15)
-                    .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblSerial2)
-                        .addComponent(txtSerial2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(15, 15, 15)
-                    .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblModel2)
-                        .addComponent(txtModel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(15, 15, 15)
-                    .addGroup(paneViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblCertificate2)
-                        .addComponent(txtCertificate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(56, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -462,17 +455,16 @@ public class ViewJPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnview, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+                .addGap(35, 35, 35)
                 .addComponent(btnUpdate)
-                .addGap(30, 30, 30)
+                .addGap(35, 35, 35)
                 .addComponent(btnDelete)
                 .addGap(62, 62, 62))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(paneUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(paneView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(paneUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -486,11 +478,11 @@ public class ViewJPanel extends javax.swing.JPanel {
                     .addComponent(btnUpdate)
                     .addComponent(btnDelete)
                     .addComponent(btnview))
-                .addGap(31, 31, 31)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(paneView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(paneUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(676, Short.MAX_VALUE))
+                    .addComponent(paneUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(paneView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(799, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -529,7 +521,13 @@ public class ViewJPanel extends javax.swing.JPanel {
 
         DefaultTableModel model = (DefaultTableModel) tblCar.getModel();
         Car selectedCar = (Car) model.getValueAt(selectedRowIndex, 0);
-
+         if (String.valueOf(selectedCar.getOccupied()) == "yes") {
+            chkAvailability.setSelected(true);
+            chkAvailability.setText("");
+        } else {
+            chkAvailability.setSelected(false);
+            chkAvailability.setText("");
+        }
         txtRegister.setText(String.valueOf(selectedCar.getRegistration_date()));
         txtBrand.setText(String.valueOf(selectedCar.getBrand()));
         txtYear.setText(String.valueOf(selectedCar.getYear()));
@@ -584,8 +582,13 @@ public class ViewJPanel extends javax.swing.JPanel {
 
         DefaultTableModel model = (DefaultTableModel) tblCar.getModel();
         Car selectedCar = (Car) model.getValueAt(selectedRowIndex, 0);
-
-        chkAvailability2.setText(String.valueOf(selectedCar.getOccupied()));
+        if (String.valueOf(selectedCar.getOccupied()) == "yes") {
+            chkAvailability2.setSelected(true);
+            chkAvailability2.setText("");
+        } else {
+            chkAvailability2.setSelected(false);
+            chkAvailability2.setText("");
+        }
         txtRegister2.setText(String.valueOf(selectedCar.getRegistration_date()));
         txtBrand2.setText(String.valueOf(selectedCar.getBrand()));
         txtYear2.setText(String.valueOf(selectedCar.getYear()));
@@ -686,11 +689,16 @@ public class ViewJPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void Update(Car ch) {
-        
+
         Date currentTime = new Date();
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         String dateTime = dateFormat.format(currentTime);
         ch.setRegistration_date(txtRegister.getText());
+         if(this.chkAvailability.isSelected()){
+           ch.setOccupied("yes"); 
+        }else{
+             ch.setOccupied("no"); 
+         }
         ch.setBrand(txtBrand.getText());
         ch.setYear(Integer.parseInt(txtYear.getText()));
         ch.setSerial_number(txtSerial.getText());
