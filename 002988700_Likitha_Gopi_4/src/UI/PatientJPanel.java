@@ -7,6 +7,8 @@ package UI;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -29,13 +31,15 @@ public class PatientJPanel extends javax.swing.JPanel {
 //    private PersonDirectory personDirectory;
     private PersonDirectory personDirectory;
     Object selectedPerson;
+     PatientDirectory pd;
+    HashMap<String, Patient> map = pd.map;
     /**
      * Creates new form PatientJPanel
      *
      */
     public PatientJPanel(PersonDirectory personDirectory) {
         
-       
+        
         initComponents();
         this.personDirectory = personDirectory;
         ArrayList<Person> personList = personDirectory.getPersonDirectory();
@@ -59,6 +63,7 @@ public class PatientJPanel extends javax.swing.JPanel {
             for (Person person : personList) {
 //            House house = person.getHouse();
 ////        for (Person person : PatientDirectory.map) {
+            System.out.println("Person value: "+person);
                 Object[] row = new Object[10];
                 row[0] = person;
                 row[1] = person.getPersonName();
@@ -117,8 +122,8 @@ public class PatientJPanel extends javax.swing.JPanel {
         lblWeight1 = new javax.swing.JLabel();
         txtHeart1 = new javax.swing.JTextField();
         txtBp1 = new javax.swing.JTextField();
-        btnRespiratory1 = new javax.swing.JTextField();
-        btnWeight1 = new javax.swing.JTextField();
+        txtRespiratory1 = new javax.swing.JTextField();
+        txtWeight1 = new javax.swing.JTextField();
 
         setToolTipText("");
 
@@ -340,15 +345,15 @@ public class PatientJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnRespiratory1.addActionListener(new java.awt.event.ActionListener() {
+        txtRespiratory1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRespiratory1ActionPerformed(evt);
+                txtRespiratory1ActionPerformed(evt);
             }
         });
 
-        btnWeight1.addActionListener(new java.awt.event.ActionListener() {
+        txtWeight1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnWeight1ActionPerformed(evt);
+                txtWeight1ActionPerformed(evt);
             }
         });
 
@@ -368,8 +373,8 @@ public class PatientJPanel extends javax.swing.JPanel {
                 .addGroup(paneViewVitalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtHeart1)
                     .addComponent(txtBp1)
-                    .addComponent(btnRespiratory1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
-                    .addComponent(btnWeight1))
+                    .addComponent(txtRespiratory1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                    .addComponent(txtWeight1))
                 .addContainerGap(108, Short.MAX_VALUE))
         );
         paneViewVitalsLayout.setVerticalGroup(
@@ -388,11 +393,11 @@ public class PatientJPanel extends javax.swing.JPanel {
                 .addGap(12, 12, 12)
                 .addGroup(paneViewVitalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRespiratory1)
-                    .addComponent(btnRespiratory1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtRespiratory1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(paneViewVitalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblWeight1)
-                    .addComponent(btnWeight1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtWeight1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -454,13 +459,13 @@ public class PatientJPanel extends javax.swing.JPanel {
         }
         
 
-        Update(person);
+        createPatient(person);
 
         
 
     }//GEN-LAST:event_btnAddPatientActionPerformed
 
-    private void Update(Person temp){
+    private void createPatient(Person temp){
         Person person = temp;
         Patient patient = new Patient();
         Encounter encounter = new Encounter();
@@ -509,17 +514,22 @@ public class PatientJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBp1ActionPerformed
 
-    private void btnRespiratory1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRespiratory1ActionPerformed
+    private void txtRespiratory1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRespiratory1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnRespiratory1ActionPerformed
+    }//GEN-LAST:event_txtRespiratory1ActionPerformed
 
-    private void btnWeight1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWeight1ActionPerformed
+    private void txtWeight1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtWeight1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnWeight1ActionPerformed
+    }//GEN-LAST:event_txtWeight1ActionPerformed
 
     private void btnCreatePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreatePatientActionPerformed
         // TODO add your handling code here:
-        
+          int selectedRowIndex = tblPerson1.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to Create Patient.");
+            return;
+        }
         setDefaultOptions1();
         paneCreatePatient.setVisible(true);
         int selectedRow= tblPerson1.getSelectedRow();
@@ -536,17 +546,27 @@ public class PatientJPanel extends javax.swing.JPanel {
 
     private void btnAddVitalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddVitalsActionPerformed
         // TODO add your handling code here:
+                  int selectedRowIndex = tblPerson1.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to add vitals.");
+            return;
+        }
         
-        setDefaultOptions1();
-        paneAddVitals.setVisible(true);
         int selectedRow= tblPerson1.getSelectedRow();
         var temp = tblPerson1.getValueAt(selectedRow, 3);
         if(temp == "Not a Patient"){
             JOptionPane.showMessageDialog(this, "Not a Patient.","Error",
                     JOptionPane.ERROR_MESSAGE);
         }else{
-            
+                    setDefaultOptions1();
+        paneAddVitals.setVisible(true);
         }
+        
+        
+        
+
+  
     }//GEN-LAST:event_btnAddVitalsActionPerformed
 
     private void btnAddVitals1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddVitals1ActionPerformed
@@ -554,6 +574,14 @@ public class PatientJPanel extends javax.swing.JPanel {
         int selectedRow= tblPerson1.getSelectedRow();
         Person person = (Person) tblPerson1.getValueAt(selectedRow, 0);
         VitalSigns vitalSign = new VitalSigns();
+        Encounter encounter = new Encounter();
+        encounter.setVisitedDate(new Date());
+        Patient p = person.getPatient();
+        EncounterHistory temp = p.getEncounterHistory();
+//        Encounter previousEnconter = p.getEncounterHistory().getList().get(0);
+        
+        //getting doctors name and patient id
+//        String docName = previousEnconter.getDoctorName();
         
         int heartRate = Integer.parseInt(txtHeart.getText());
         int bp = Integer.parseInt(txtBp.getText());
@@ -564,18 +592,34 @@ public class PatientJPanel extends javax.swing.JPanel {
         vitalSign.setBloodPressure(bp);
         vitalSign.setRespiratoryRate(resRate);
         vitalSign.setWeightPounds(weight);
-        person.setVitalSign(vitalSign);
+        encounter.setVs(vitalSign);
+//        encounter.setDoctorName(docName);
+        JOptionPane.showMessageDialog(this, "Vital Signs added!!", "Update",
+                JOptionPane.INFORMATION_MESSAGE);
         
+        ArrayList<Encounter> al = p.getEncounterHistory().getList();
+        al.add(encounter);
+        temp.setList(al);
+        p.setEncounterHistory(temp);
+        person.setVitalSign(vitalSign);
+        txtHeart.setText("");
+        txtBp.setText("");
+        txtRespiratory.setText("");
+        txtWeight.setText("");
     }//GEN-LAST:event_btnAddVitals1ActionPerformed
 
     private void btnViewVitalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewVitalsActionPerformed
+          int selectedRowIndex = tblPerson1.getSelectedRow();
 
-        setDefaultOptions1();
-        paneViewVitals.setVisible(true);
-        int selectedRow= tblPerson1.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to view patient.");
+            return;
+        }
+                int selectedRow= tblPerson1.getSelectedRow();
        Person person = (Person) tblPerson1.getValueAt(selectedRow, 0);
        
-     var temp = tblPerson1.getValueAt(selectedRow, 3);
+
+             var temp = tblPerson1.getValueAt(selectedRow, 3);
        var temp1 = person.getVitalSign();
       
         if(temp == "Not a Patient"){
@@ -586,9 +630,16 @@ public class PatientJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "No Vital signs added.","Error",
                     JOptionPane.ERROR_MESSAGE);
         }else{
-            System.out.println(temp1.getBloodPressure());
+            
+        setDefaultOptions1();
+        paneViewVitals.setVisible(true);
+        
+        txtHeart1.setText(String.valueOf(temp1.getHeartRate()));
+        txtRespiratory1.setText(String.valueOf(temp1.getRespiratoryRate()));
+        txtBp1.setText(String.valueOf(temp1.getBloodPressure()));
+        txtWeight1.setText(String.valueOf(temp1.getWeightPounds()));
         }
-       
+ 
     }//GEN-LAST:event_btnViewVitalsActionPerformed
     
     protected void setDefaultOptions1() {
@@ -602,9 +653,7 @@ public class PatientJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnAddVitals;
     private javax.swing.JButton btnAddVitals1;
     private javax.swing.JButton btnCreatePatient;
-    private javax.swing.JTextField btnRespiratory1;
     private javax.swing.JButton btnViewVitals;
-    private javax.swing.JTextField btnWeight1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBp;
     private javax.swing.JLabel lblBp1;
@@ -633,6 +682,8 @@ public class PatientJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtPatientID;
     private javax.swing.JTextField txtPurpose;
     private javax.swing.JTextField txtRespiratory;
+    private javax.swing.JTextField txtRespiratory1;
     private javax.swing.JTextField txtWeight;
+    private javax.swing.JTextField txtWeight1;
     // End of variables declaration//GEN-END:variables
 }

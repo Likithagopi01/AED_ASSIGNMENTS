@@ -7,7 +7,7 @@ package model;
 
 /**
  *
- * @author psrib
+ * @author Likitha G
  */
 public class House extends Community {
     

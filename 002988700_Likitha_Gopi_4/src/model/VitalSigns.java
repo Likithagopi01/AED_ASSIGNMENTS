@@ -7,7 +7,7 @@ package model;
 
 /**
  *
- * @author psribt
+ * @author Likitha G
  */
 public class VitalSigns {
 
@@ -184,6 +184,7 @@ public class VitalSigns {
     public void setWeightPounds(float WeightPounds) {
         this.WeightPounds = WeightPounds;
     }
+
 
 
 }

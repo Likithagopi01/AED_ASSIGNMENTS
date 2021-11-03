@@ -5,6 +5,7 @@
  */
 package UI;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -43,6 +44,7 @@ public class PersonJPanel extends javax.swing.JPanel {
 //        this.house = house;
 
         setDefaultOptions();
+        populateTable();
 
     }
 
@@ -131,16 +133,21 @@ public class PersonJPanel extends javax.swing.JPanel {
 
         btnDelete.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btnDelete.setText("Delete Person");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         tblPerson.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Name", "Age", "City", "Community", "House No"
+                "Name", "Age", "City", "Community", "House No", "Title 6"
             }
         ));
         jScrollPane1.setViewportView(tblPerson);
@@ -455,20 +462,19 @@ public class PersonJPanel extends javax.swing.JPanel {
                 .addComponent(CreatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnCreate)
-                                .addGap(26, 26, 26)
-                                .addComponent(btnView)
-                                .addGap(26, 26, 26)
-                                .addComponent(btnUpdate)
-                                .addGap(26, 26, 26)
-                                .addComponent(btnDelete)))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(btnCreate)
+                            .addGap(26, 26, 26)
+                            .addComponent(btnView)
+                            .addGap(26, 26, 26)
+                            .addComponent(btnUpdate)
+                            .addGap(26, 26, 26)
+                            .addComponent(btnDelete))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -501,8 +507,26 @@ public class PersonJPanel extends javax.swing.JPanel {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        setDefaultOptions();
-        UpdatePanel.setVisible(true);
+               
+        int selectedRowIndex = tblPerson.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to Update.");
+            return;
+        }
+
+         setDefaultOptions();
+         UpdatePanel.setVisible(true);
+
+        DefaultTableModel model = (DefaultTableModel) tblPerson.getModel();
+        Person person=(Person) tblPerson.getValueAt(selectedRowIndex, 0);
+        House house = person.getHouse();
+//        House house = ( House) tblPerson.getValueAt(selectedRowIndex, 0);
+        txtName6.setText(person.getPersonName());
+        txtAge6.setText(person.getAge());
+        txtCity6.setText(house.getCityName());
+        txtCommunity6.setText(house.getCommunityName());
+        txtHouse6.setText(String.valueOf(house.getHouseNo()));
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
@@ -526,14 +550,39 @@ public class PersonJPanel extends javax.swing.JPanel {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
 //        Person person1 = personDirectory.addNewPerson();
-
+        
+String serialregex = "^[A-Za-z]$";
+String intregex = "[0-9]+";
+String regex = "^[0-9]{1,2} "+" [A-Z a-z]{1,20}$";
+if((txtName.getText().isEmpty ()||txtCommunity.getText().isEmpty()||txtCity.getText().isEmpty()||txtAge.getText().isEmpty()|| txtHouse.getText().isEmpty()))
+                {
+        JOptionPane.showMessageDialog(this, "Enter All Details");
+        }
+//        else if(!txtName.equals(serialregex) ){
+//            JOptionPane.showMessageDialog(this, "Enter Proper Name Details !");            
+////        }
+//        else if(!txtCommunity.equals(serialregex)){
+//            JOptionPane.showMessageDialog(this, "Enter Proper Community Details !");            
+//        }
+//        else if(!txtCity.equals(serialregex)){
+//            JOptionPane.showMessageDialog(this, "Enter Proper City Details !");            
+//        }
+//        else if(!txtHouse.equals(intregex)){
+//            JOptionPane.showMessageDialog(this, "Enter Proper House Details !");            
+//        }
+//
+//
+//        
+        else{
+            
         String personName = txtName.getText();
         String age = txtAge.getText();
         int houseNo = Integer.parseInt(txtHouse.getText());
         String community = txtCommunity.getText();
         String city = txtCity.getText();
-
+ 
 //        Person person = personDirectory.addNewPerson();
+
 //        House house = new House();
 //        House house = personDirectory.addNewPerson();
 //        person.setPersonName(personName);
@@ -545,7 +594,7 @@ public class PersonJPanel extends javax.swing.JPanel {
         Encounter encounter = new Encounter();
         EncounterHistory encounterHistory = new EncounterHistory();
         VitalSigns vitalSigns = new VitalSigns();
-         Person person = personDirectory.addNewPerson();
+        Person person = personDirectory.addNewPerson();
 
         person.setPersonName(personName);
         person.setAge(age);
@@ -560,7 +609,10 @@ public class PersonJPanel extends javax.swing.JPanel {
         house.setCommunityList(house);
         house.setHouseList(house);
         person.setHouse(house);
-//        city = house;
+//        ArrayList<Person> al = new ArrayList<>();
+//        al.add(person);
+////        temp.setList(al);
+//        personDirectory.setPersonDirectory(al);
 
         JOptionPane.showMessageDialog(this, "New Person Details added!");
 
@@ -572,6 +624,7 @@ public class PersonJPanel extends javax.swing.JPanel {
         populateTable();
         revalidate();
             repaint();
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void txtName1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtName1ActionPerformed
@@ -608,15 +661,59 @@ public class PersonJPanel extends javax.swing.JPanel {
 
     private void btnUpdate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate1ActionPerformed
         // TODO add your handling code here:
+        
+        int selectedRowIndex = tblPerson.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) tblPerson.getModel();
+        Person person = (Person) model.getValueAt(selectedRowIndex, 0);
+        Update(person);   
     }//GEN-LAST:event_btnUpdate1ActionPerformed
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
-        // TODO add your handling code here:
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                // TODO add your handling code here:
+  
         
-        setDefaultOptions();
+          int selectedRowIndex = tblPerson.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to View.");
+            return;
+        }
+          
+         setDefaultOptions();
          ViewPanel.setVisible(true);
+
+        DefaultTableModel model = (DefaultTableModel) tblPerson.getModel();
+        Person person=(Person) tblPerson.getValueAt(selectedRowIndex, 0);
+        House house = person.getHouse();
+//        House house = ( House) tblPerson.getValueAt(selectedRowIndex, 0);
+        txtName1.setText(person.getPersonName());
+        txtAge1.setText(person.getAge());
+        txtCity1.setText(house.getCityName());
+        txtCommunity1.setText(house.getCommunityName());
+        txtHouse1.setText(String.valueOf(house.getHouseNo()));
+       
+         
         
     }//GEN-LAST:event_btnViewActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = tblPerson.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to delete.");
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) tblPerson.getModel();
+        Person person = (Person) model.getValueAt(selectedRowIndex, 0);
+
+        personDirectory.deletePerson(person);
+
+        JOptionPane.showMessageDialog(this, "Person Details Deleted.");
+
+        populateTable();
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -676,7 +773,17 @@ public class PersonJPanel extends javax.swing.JPanel {
         UpdatePanel.setVisible(false);
     }
     
-    
+        private void Update(Person person) {
+        House house = person.getHouse();
+        person.setPersonName(txtName6.getText());
+        person.setAge(txtAge6.getText());
+        house.setCityName(txtCity6.getText());
+        house.setCommunityName(txtCommunity6.getText());
+        house.setHouseNo(Integer.parseInt(txtHouse6.getText()));
+        populateTable();
+
+    }
+
     
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) tblPerson.getModel();
@@ -688,11 +795,12 @@ public class PersonJPanel extends javax.swing.JPanel {
             House house = person.getHouse();
 ////        for (Person person : PatientDirectory.map) {
             Object[] row = new Object[10];
-            row[0] = person.getPersonName();
-            row[1] = person.getAge();
-            row[2] = house.getCityName();
-            row[3] = house.getCommunityName();
-            row[4] = house.getHouseNo();
+            row[0] = person;
+            row[1] = person.getPersonName();
+            row[2] = person.getAge();
+            row[3] = house.getCityName();
+            row[4] = house.getCommunityName();
+            row[5] = house.getHouseNo();
             model.addRow(row);
 
         }

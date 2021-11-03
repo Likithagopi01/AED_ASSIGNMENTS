@@ -16,13 +16,13 @@ import model.PatientDirectory;
 import model.Person;
 import model.PersonDirectory;
 import model.VitalSigns;
+
+
 /**
  *
  * @author Likitha G
  */
-  
-
-public class MainJFrame extends javax.swing.JFrame {
+  public class MainJFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form MainJFrame
@@ -149,7 +149,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnAnalyseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalyseActionPerformed
         // TODO add your handling code here:
-        AnalyseJPanel Analysepanel = new AnalyseJPanel();
+        AnalyseJPanel Analysepanel = new AnalyseJPanel(personDirectory);
         SplitPane.setRightComponent(Analysepanel);
         
     }//GEN-LAST:event_btnAnalyseActionPerformed

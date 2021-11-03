@@ -10,22 +10,22 @@ import java.util.HashMap;
 
 /**
  *
- * @author psrib
+ * @author Likitha G
  */
 public class EncounterHistory {
-    
-    private ArrayList < Encounter > encounterHistory;
 
-  public EncounterHistory() {
+    private ArrayList< Encounter> encounterHistory = new ArrayList<>();
 
-        this.encounterHistory = new ArrayList < Encounter > ();
+    public EncounterHistory() {
+
+        this.encounterHistory = new ArrayList<Encounter>();
     }
 
-    public ArrayList < Encounter > getList() {
+    public ArrayList< Encounter> getList() {
         return encounterHistory;
     }
 
-    public void setList(ArrayList < Encounter > encounterHistory) {
+    public void setList(ArrayList< Encounter> encounterHistory) {
         this.encounterHistory = encounterHistory;
     }
 
@@ -33,8 +33,6 @@ public class EncounterHistory {
         Encounter encounter = new Encounter();
         encounterHistory.add(encounter);
         return encounter;
-    }  
-    
-    
-        
+    }
+
 }

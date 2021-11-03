@@ -5,10 +5,16 @@
  */
 package UI;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.City;
 import model.House;
 import model.Community;
@@ -16,21 +22,32 @@ import model.Patient;
 import model.PatientDirectory;
 import model.VitalSigns;
 import model.Person;
+import model.EncounterHistory;
+import model.Encounter;
+import model.PersonDirectory;
+
 /**
  *
  * @author Likitha G
  */
 public class AnalyseJPanel extends javax.swing.JPanel {
 
+    PersonDirectory personDirectory;
     PatientDirectory pd;
     HashMap<String, Patient> map = pd.map;
-
+    VitalSigns vitalSigns;
+    Map<String, VitalSigns> vitalMap = new HashMap();
+    String Name;
+    
     /**
      * Creates new form AnalyseJPanel
      */
-    public AnalyseJPanel() {
+    public AnalyseJPanel(PersonDirectory personDirectory) {
         initComponents();
+//        setDefaultOptions2();
+        this.personDirectory = personDirectory;
         setDefaultOptions2();
+        //populate();
     }
 
     /**
@@ -47,38 +64,14 @@ public class AnalyseJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         paneviewvitals = new javax.swing.JPanel();
         btnSearch = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        txtSearch = new javax.swing.JTextField();
         panecrudvitals = new javax.swing.JPanel();
-        btncrudedit = new javax.swing.JButton();
-        btncrudview = new javax.swing.JButton();
-        btncrudremove = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        panevitals = new javax.swing.JPanel();
-        lblHeartRate = new javax.swing.JLabel();
-        lblBp = new javax.swing.JLabel();
-        lblRespiratory = new javax.swing.JLabel();
-        lblWeight = new javax.swing.JLabel();
-        txtHeart = new javax.swing.JTextField();
-        txtBp = new javax.swing.JTextField();
-        btnRespiratory = new javax.swing.JTextField();
-        btnWeight = new javax.swing.JTextField();
-        lblCreatePatient2 = new javax.swing.JLabel();
-        paneeditvitals = new javax.swing.JPanel();
-        lblHeartRate1 = new javax.swing.JLabel();
-        lblBp1 = new javax.swing.JLabel();
-        lblRespiratory1 = new javax.swing.JLabel();
-        lblWeight1 = new javax.swing.JLabel();
-        txtHeart1 = new javax.swing.JTextField();
-        txtBp1 = new javax.swing.JTextField();
-        btnRespiratory1 = new javax.swing.JTextField();
-        btnWeight1 = new javax.swing.JTextField();
-        lblCreatePatient3 = new javax.swing.JLabel();
-        btnedit = new javax.swing.JButton();
         paneAnalyseCommunity = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        communityTable = new javax.swing.JTable();
         dropdown = new javax.swing.JComboBox<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        analyze = new javax.swing.JTable();
 
         btnAnalyse.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btnAnalyse.setText("Analyse By Person");
@@ -108,24 +101,21 @@ public class AnalyseJPanel extends javax.swing.JPanel {
             }
         });
 
-        btncrudedit.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btncrudedit.setText("Delete Vitals");
-
-        btncrudview.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btncrudview.setText("View Vitals");
-
-        btncrudremove.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btncrudremove.setText("Edit Vitals");
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Patient_ID", "Patient Name", "Encounter"
+                "Patient_ID", "Patient Name", "Encounter", "Date", "Heart Rate", "Respiratory Rate", "Blood Pressure", "Weight"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -135,17 +125,8 @@ public class AnalyseJPanel extends javax.swing.JPanel {
         panecrudvitalsLayout.setHorizontalGroup(
             panecrudvitalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panecrudvitalsLayout.createSequentialGroup()
-                .addGroup(panecrudvitalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panecrudvitalsLayout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(btncrudview)
-                        .addGap(18, 18, 18)
-                        .addComponent(btncrudremove)
-                        .addGap(18, 18, 18)
-                        .addComponent(btncrudedit))
-                    .addGroup(panecrudvitalsLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(61, Short.MAX_VALUE))
         );
         panecrudvitalsLayout.setVerticalGroup(
@@ -153,168 +134,7 @@ public class AnalyseJPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panecrudvitalsLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addGroup(panecrudvitalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btncrudview)
-                    .addComponent(btncrudremove)
-                    .addComponent(btncrudedit))
-                .addGap(26, 26, 26))
-        );
-
-        lblHeartRate.setText("Heart Rate");
-
-        lblBp.setText("Blood Pressure");
-
-        lblRespiratory.setText("Respiratory Rate");
-
-        lblWeight.setText("Weight(in Pounds)");
-
-        txtBp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBpActionPerformed(evt);
-            }
-        });
-
-        btnRespiratory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRespiratoryActionPerformed(evt);
-            }
-        });
-
-        btnWeight.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnWeightActionPerformed(evt);
-            }
-        });
-
-        lblCreatePatient2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblCreatePatient2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCreatePatient2.setText("View Vital Details:");
-
-        javax.swing.GroupLayout panevitalsLayout = new javax.swing.GroupLayout(panevitals);
-        panevitals.setLayout(panevitalsLayout);
-        panevitalsLayout.setHorizontalGroup(
-            panevitalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblCreatePatient2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(panevitalsLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(panevitalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblHeartRate, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblBp)
-                    .addComponent(lblRespiratory)
-                    .addComponent(lblWeight))
-                .addGap(58, 58, 58)
-                .addGroup(panevitalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtHeart)
-                    .addComponent(txtBp)
-                    .addComponent(btnRespiratory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
-                    .addComponent(btnWeight))
-                .addContainerGap(59, Short.MAX_VALUE))
-        );
-        panevitalsLayout.setVerticalGroup(
-            panevitalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panevitalsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblCreatePatient2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addGroup(panevitalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblHeartRate, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHeart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
-                .addGroup(panevitalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblBp)
-                    .addComponent(txtBp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(panevitalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblRespiratory)
-                    .addComponent(btnRespiratory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(panevitalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblWeight)
-                    .addComponent(btnWeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
-        );
-
-        lblHeartRate1.setText("Heart Rate");
-
-        lblBp1.setText("Blood Pressure");
-
-        lblRespiratory1.setText("Respiratory Rate");
-
-        lblWeight1.setText("Weight(in Pounds)");
-
-        txtBp1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBp1ActionPerformed(evt);
-            }
-        });
-
-        btnRespiratory1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRespiratory1ActionPerformed(evt);
-            }
-        });
-
-        btnWeight1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnWeight1ActionPerformed(evt);
-            }
-        });
-
-        lblCreatePatient3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblCreatePatient3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCreatePatient3.setText("Edit Vital Details:");
-
-        btnedit.setText("Edit");
-
-        javax.swing.GroupLayout paneeditvitalsLayout = new javax.swing.GroupLayout(paneeditvitals);
-        paneeditvitals.setLayout(paneeditvitalsLayout);
-        paneeditvitalsLayout.setHorizontalGroup(
-            paneeditvitalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblCreatePatient3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(paneeditvitalsLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(paneeditvitalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblHeartRate1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblBp1)
-                    .addComponent(lblRespiratory1)
-                    .addComponent(lblWeight1))
-                .addGap(58, 58, 58)
-                .addGroup(paneeditvitalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtHeart1)
-                    .addComponent(txtBp1)
-                    .addComponent(btnRespiratory1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
-                    .addComponent(btnWeight1))
-                .addContainerGap(59, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneeditvitalsLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnedit)
-                .addGap(74, 74, 74))
-        );
-        paneeditvitalsLayout.setVerticalGroup(
-            paneeditvitalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(paneeditvitalsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblCreatePatient3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addGroup(paneeditvitalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblHeartRate1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHeart1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
-                .addGroup(paneeditvitalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblBp1)
-                    .addComponent(txtBp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(paneeditvitalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblRespiratory1)
-                    .addComponent(btnRespiratory1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(paneeditvitalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblWeight1)
-                    .addComponent(btnWeight1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnedit)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout paneviewvitalsLayout = new javax.swing.GroupLayout(paneviewvitals);
@@ -326,17 +146,10 @@ public class AnalyseJPanel extends javax.swing.JPanel {
                 .addComponent(panecrudvitals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(468, 468, 468))
             .addGroup(paneviewvitalsLayout.createSequentialGroup()
-                .addGroup(paneviewvitalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(paneviewvitalsLayout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(paneviewvitalsLayout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(paneeditvitals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panevitals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(135, 135, 135)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         paneviewvitalsLayout.setVerticalGroup(
@@ -345,28 +158,11 @@ public class AnalyseJPanel extends javax.swing.JPanel {
                 .addGap(32, 32, 32)
                 .addGroup(paneviewvitalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSearch)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(panecrudvitals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(paneviewvitalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panevitals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(paneeditvitals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addComponent(panecrudvitals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
-
-        communityTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(communityTable);
 
         dropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select City..." }));
         dropdown.addActionListener(new java.awt.event.ActionListener() {
@@ -375,25 +171,40 @@ public class AnalyseJPanel extends javax.swing.JPanel {
             }
         });
 
+        analyze.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Community Name", "Total No Of People", "Total No Of Abnormal People"
+            }
+        ));
+        jScrollPane3.setViewportView(analyze);
+
         javax.swing.GroupLayout paneAnalyseCommunityLayout = new javax.swing.GroupLayout(paneAnalyseCommunity);
         paneAnalyseCommunity.setLayout(paneAnalyseCommunityLayout);
         paneAnalyseCommunityLayout.setHorizontalGroup(
             paneAnalyseCommunityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneAnalyseCommunityLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(paneAnalyseCommunityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                    .addGroup(paneAnalyseCommunityLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(dropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(paneAnalyseCommunityLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(373, Short.MAX_VALUE))
         );
         paneAnalyseCommunityLayout.setVerticalGroup(
             paneAnalyseCommunityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneAnalyseCommunityLayout.createSequentialGroup()
-                .addContainerGap(72, Short.MAX_VALUE)
+            .addGroup(paneAnalyseCommunityLayout.createSequentialGroup()
                 .addComponent(dropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(347, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -407,14 +218,13 @@ public class AnalyseJPanel extends javax.swing.JPanel {
                         .addComponent(btnAnalyse)
                         .addGap(63, 63, 63)
                         .addComponent(btnAnalyseCommunity))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(paneviewvitals, javax.swing.GroupLayout.PREFERRED_SIZE, 746, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(paneAnalyseCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(253, Short.MAX_VALUE))
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(paneviewvitals, javax.swing.GroupLayout.PREFERRED_SIZE, 746, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(paneAnalyseCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -427,154 +237,303 @@ public class AnalyseJPanel extends javax.swing.JPanel {
                     .addComponent(btnAnalyseCommunity))
                 .addGap(18, 18, 18)
                 .addComponent(paneviewvitals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(323, 323, 323)
                 .addComponent(paneAnalyseCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(235, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAnalyseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalyseActionPerformed
         // TODO add your handling code here:
+        setDefaultOptions2();
+        paneviewvitals.setVisible(true);
+        panecrudvitals.setVisible(false);
+        
+
     }//GEN-LAST:event_btnAnalyseActionPerformed
+
+    private void populate(){ 
+        System.out.println("Inside");
+        DefaultTableModel model12 = (DefaultTableModel) analyze.getModel();
+        model12.setRowCount(0);
+        for (int j =0; j < 10 ; j++) {
+            Object[] row = new Object[3];
+            row[0] = "dsds";
+            row[1] = "DSJJDG";
+            row[2] = "DSkdhjkdh";
+             model12.addRow(row);
+//            System.out.println("Inside For: "+i);
+//            System.out.println("The Community Name: "+temp + " - " + peopleCount.get(i) + " - " + Patientcount.get(i));
+//            i++;
+        }
+    }
+    private void populateTable(Set<String> communityName, List peopleCount, List Patientcount) {
+        DefaultTableModel model12 = (DefaultTableModel) analyze.getModel();
+        model12.setRowCount(0);  
+        int selectedRow= jTable1.getSelectedRow();
+        
+        int i = 0;
+        System.out.println("Community Name: "+communityName.size());
+        for (String temp : communityName) {
+            Object[] row = new Object[3];
+            row[0] = String.valueOf(temp);
+            row[1] = peopleCount.get(i);
+            row[2] = Patientcount.get(i);
+            model12.addRow(row);
+            System.out.println("Inside For: "+i);
+            System.out.println("The Community Name: "+temp + " - " + peopleCount.get(i) + " - " + Patientcount.get(i));
+            i++;
+        }
+
+   }
+   
+
+    
 
     private void btnAnalyseCommunityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalyseCommunityActionPerformed
         setDefaultOptions2();
         paneAnalyseCommunity.setVisible(true);
+        dropdown.setVisible(true);
         analyzeRecords();
 
     }//GEN-LAST:event_btnAnalyseCommunityActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSearchActionPerformed
 
-    private void txtBpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBpActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBpActionPerformed
+//        setDefaultOptions2();
+//        paneeditvitals.setVisible(false);
+//        panevitals.setVisible(false);
+        Name = txtSearch.getText();
+        if (personDirectory.getPersonDirectory() == null) {
+            System.out.println("null value");
+        } else {
+            ArrayList<Person> as = personDirectory.getPersonDirectory();
+//            for (int i = 0; i < as.size() - 1; i++) {
+//                System.out.println("Patient Names  " + as.get(i).getPatient().getEncounterHistory().getList());
+//            }
 
-    private void btnRespiratoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRespiratoryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRespiratoryActionPerformed
+            jTable1.setVisible(true);
+            panecrudvitals.setVisible(true);
 
-    private void btnWeightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWeightActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnWeightActionPerformed
+            ArrayList<Person> p = personDirectory.searchPatient(Name);
+            
+            Person temp = p.get(0);
+            String patientAge = temp.getAgeGroup();
+//            vitalSigns.VitalSigns(patientAge);
+            String patientId = temp.getPatient().getPid();
+            ArrayList<Encounter> ph = temp.getPatient().getEncounterHistory().getList();
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0);
 
-    private void txtBp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBp1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBp1ActionPerformed
-
-    private void btnRespiratory1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRespiratory1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRespiratory1ActionPerformed
-
-    private void btnWeight1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWeight1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnWeight1ActionPerformed
-
-    private void dropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropdownActionPerformed
-       HashMap<String,List<Community>> map = City.getCitymap();
-       dropdown.setSelectedItem(map);
-    }//GEN-LAST:event_dropdownActionPerformed
-    public void analyzeRecords() {
-
-        System.out.println("Enter Choose the city below to analyze");
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("Choose the city below ");
-        System.out.println(City.getCitymap().keySet());
-        String s1 = sc.nextLine();
-        List<Community> list = City.getCitymap().get(s1);
-        
-        System.out.println("This city has " + list.size() + " communities ");
-        int count = 0;
-        int pc = 0;
-        for (int i = 0; i < list.size(); i++) {
-            //System.out.println("COmmunity Names "+ City.getCitymap().get(s1).get(i).getCommunityName());
-            Map<String, List<House>> list1 = list.get(i).getCommunitymap();
-            List<House> h = list1.get(City.getCitymap().get(s1).get(i).getCommunityName());
-            for (House h1 : h) {
-                pc++;
-                //System.out.println("SSS "+ h1.getSetPerson().getEncounterHistory().getList().get(0).getVs().getSystolicBloodPressure());
-                for (int k = 0; k < h1.getSetPerson().getPatient().getEncounterHistory().getList().size(); k++) {
-                    if (checkVitals(h1.getSetPerson(), map.get(h1.getSetPerson().getPersonName()))) {
-                        System.out.println("Normal for " + h1.getSetPerson().getPersonName());
-
-                    } else {
-                        System.out.println("Abnormal for " + h1.getSetPerson().getPersonName());
-                        count++;
-                    }
-                }
-
+//       Encounter firstVisit = patientHistory.get(0);
+//       String docName = firstVisit.getDoctorName();
+//       patientHistory.remove(0);
+            ArrayList<Encounter> patientHistory = ph;
+            //skipping 1st element since it doesnt have vitalsigns when we create a patient.
+            //need to remove vital signs from person and move to patient class
+            int i = 1;
+            
+            for (Encounter data : patientHistory) {
+                VitalSigns vs = patientHistory.get(i).getVs();
+                Object[] row = new Object[10];
+                row[0] = patientId;
+                row[1] = Name;
+                row[2] = getEncounterResult(vs, patientAge);
+                row[3] = patientHistory.get(i).getVisitedDate();
+                row[4] = patientHistory.get(i).getVs().getBloodPressure();
+                i++;
+                model.addRow(row);
+                
             }
         }
-        System.out.println("There are " + list.size() + " communities in this city and of total of " + pc + " patients. " + count + " Paitient has abnormal vital ranges for a given city ");
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    
+    private String getEncounterResult(VitalSigns vs, String patientAge) {
+        VitalSigns v = new VitalSigns(patientAge);
+        if (vs.getHeartRate() >= v.gethLB() && vs.getHeartRate() < v.gethUB()
+                && vs.getRespiratoryRate() >= v.getrLB() && vs.getRespiratoryRate() < v.getrUB()
+                && vs.getBloodPressure() >= v.getBpLB() && vs.getBloodPressure() <= v.getBpUB()
+                && vs.getWeightPounds() >= v.getWpLB() && vs.getWeightPounds() < v.getWpUB()) {
+            return "Normal";
+        } else {
+            return "Abnormal";
+        }
 
     }
+    
+    private void viewVitals(){
+        
+      
+    }
+
+
+    private void dropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropdownActionPerformed
+        String CitySelected = dropdown.getSelectedItem().toString();
+        List<Community> Communitylist = City.getCitymap().get(CitySelected);
+        System.out.println(CitySelected);
+        ArrayList<Person> as = personDirectory.getPersonDirectory();
+        Set<String> commName = new HashSet<String>();
+        List<Integer> TotalPer = new ArrayList<Integer>();
+        List<Integer> TotalPat = new ArrayList<Integer>();
+        int CommunityCount = 0;
+        for (Community C : Communitylist) {
+            System.out.println("Inside For Eacg: "+C);
+            commName.add(City.getCitymap().get(CitySelected).get(CommunityCount).getCommunityName());
+            Map<String, List<House>> list1 = Communitylist.get(CommunityCount).getCommunitymap();
+            List<House> h = list1.get(City.getCitymap().get(CitySelected).get(CommunityCount).getCommunityName());
+
+            int TotalPerson = 0;
+            int TotalPatients = 0;
+            for (House h1 : h) {
+                TotalPerson++;
+                String patientResult = getEncounterResult(h1.getSetPerson().getVitalSign(), h1.getSetPerson().getAgeGroup());
+                if (patientResult == "Abnormal") {
+                    TotalPatients++;
+                }
+            }
+            TotalPer.add(TotalPerson);
+            TotalPat.add(TotalPatients);
+            CommunityCount++;
+            
+        }
+        System.out.println("Dropdown Value: "+CitySelected);
+        populateTable(commName, TotalPer, TotalPat);
+
+//        System.out.println("This city has " + Communitylist.size() + " communities ");
+//        int count = 0;
+//        int pc = 0;
+//        List<String> communityName = new ArrayList<String>();
+//        communityName.add(person.)
+//        for (int i = 0; i < Communitylist.size(); i++) {
+        //System.out.println("COmmunity Names "+ City.getCitymap().get(s1).get(i).getCommunityName());
+//            Map<String, List<House>> list1 = Communitylist.get(i).getCommunitymap();
+//            communityName.add(list1.keySet().toArray()[0]);
+//            communityName.add(City.getCitymap().get(CitySelected).get(i).getCommunityName());
+//
+//            List<House> h = list1.get(City.getCitymap().get(CitySelected).get(i).getCommunityName());
+//            for (House h1 : h) {
+//                pc++;
+        //System.out.println("SSS "+ h1.getSetPerson().getEncounterHistory().getList().get(0).getVs().getSystolicBloodPressure());
+//                for (int k = 0; k < h1.getSetPerson().getPatient().getEncounterHistory().getList().size(); k++) {
+//                    if (checkVitals(h1.getSetPerson(), map.get(h1.getSetPerson().getPersonName()))) {
+//                        System.out.println("Normal for " + h1.getSetPerson().getPersonName());
+//                    } else {
+//                        System.out.println("Abnormal for " + h1.getSetPerson().getPersonName());
+//                        count++;
+//                    }
+//
+//                }
+//
+//            }
+//        }
+//        populateTable(communityName, pc, count);
+//        List<String> list1 = new ArrayList<>(Arrays.asList("Community", "People", "Patient"));
+//        list1["Community"] = "4";
+//        System.out.println("There are " + Communitylist.size() + " communities in this city and of total of " + pc + " patients. " + count + " Paitient has abnormal vital ranges for a given city ");
+    }
+    
+
+    
 
     public boolean checkVitals(Person v, Patient p) {
 
-        VitalSigns v1 = new VitalSigns("ADOLESCENT");
-
-//            if (v.getSystolicBloodPressure() >= v1.getSysBloodPressureLB()&& 
-//                    v.getSystolicBloodPressure() < v1.getSysBloodPressureUB())
-        if (v.getVitalSign().getBloodPressure() >= 60
+//        VitalSigns v1 = vitalSigns.VitalSigns("ADOLESCENT");
+        if (v.getVitalSign().getBloodPressure() >= 50
                 && v.getVitalSign().getBloodPressure() < 100) {
-            return true;
-        } else {
-            return false;
+            if (v.getVitalSign().getBloodPressure() >= 60
+                    && v.getVitalSign().getBloodPressure() < 100) {
+                return true;
+            } else {
+                return false;
+            }
         }
+        return false;
+
+
+    }//GEN-LAST:event_dropdownActionPerformed
+
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchActionPerformed
+    public void analyzeRecords() {
+
+//        System.out.println("Enter Choose the city below to analyze");
+//        Scanner sc = new Scanner(System.in);
+//        System.out.println("Choose the city below ");
+//        System.out.println(City.getCitymap().keySet());
+        Set<String> set = new HashSet<String>();
+        for (String temp : City.getCitymap().keySet()) {
+            if (!set.contains(set)) {
+                set.add(temp);
+                dropdown.addItem(temp);
+            }
+        }
+//        String s1 = sc.nextLine();
+
+//        System.out.println("This city has " + list.size() + " communities ");
+//        int count = 0;
+//        int pc = 0;
+//        for (int i = 0; i < Communitylist.size(); i++) {
+//            //System.out.println("COmmunity Names "+ City.getCitymap().get(s1).get(i).getCommunityName());
+//            Map<String, List<House>> list1 = Communitylist.get(i).getCommunitymap();
+//            List<House> h = list1.get(City.getCitymap().get(CitySelected).get(i).getCommunityName());
+//            for (House h1 : h) {
+//                pc++;
+//                //System.out.println("SSS "+ h1.getSetPerson().getEncounterHistory().getList().get(0).getVs().getSystolicBloodPressure());
+//                for (int k = 0; k < h1.getSetPerson().getPatient().getEncounterHistory().getList().size(); k++) {
+//                    if (checkVitals(h1.getSetPerson(), map.get(h1.getSetPerson().getPersonName()))) {
+//                        System.out.println("Normal for " + h1.getSetPerson().getPersonName());
+//
+//                    } else {
+//                        System.out.println("Abnormal for " + h1.getSetPerson().getPersonName());
+//                        count++;
+//                    }
+//                }
+//
+//            }
+//        }
+//        System.out.println("There are " + Communitylist.size() + " communities in this city and of total of " + pc + " patients. " + count + " Paitient has abnormal vital ranges for a given city ");
+//
+//    }
+//    public boolean checkVitals(Person v, Patient p) {
+//
+//        VitalSigns v1 = new VitalSigns("ADOLESCENT");
+//
+////            if (v.getSystolicBloodPressure() >= v1.getSysBloodPressureLB()&& 
+////                    v.getSystolicBloodPressure() < v1.getSysBloodPressureUB())
+//        if (v.getVitalSign().getBloodPressure() >= 60
+//                && v.getVitalSign().getBloodPressure() < 100) {
+//            return true;
+//        } else {
+//            return false;
+//        }
     }
 
-    
-       protected void setDefaultOptions2() {
+    protected void setDefaultOptions2() {
 
         paneviewvitals.setVisible(false);
         panecrudvitals.setVisible(false);
-        panevitals.setVisible(false);
-        paneeditvitals.setVisible(false);
+//        panevitals.setVisible(false);
         paneAnalyseCommunity.setVisible(false);
-        communityTable.setVisible(false);
-        
+        //analyze.setVisible(false);
+        dropdown.setVisible(false);
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable analyze;
     private javax.swing.JButton btnAnalyse;
     private javax.swing.JButton btnAnalyseCommunity;
-    private javax.swing.JTextField btnRespiratory;
-    private javax.swing.JTextField btnRespiratory1;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JTextField btnWeight;
-    private javax.swing.JTextField btnWeight1;
-    private javax.swing.JButton btncrudedit;
-    private javax.swing.JButton btncrudremove;
-    private javax.swing.JButton btncrudview;
-    private javax.swing.JButton btnedit;
-    private javax.swing.JTable communityTable;
     private javax.swing.JComboBox<String> dropdown;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JLabel lblBp;
-    private javax.swing.JLabel lblBp1;
-    private javax.swing.JLabel lblCreatePatient2;
-    private javax.swing.JLabel lblCreatePatient3;
-    private javax.swing.JLabel lblHeartRate;
-    private javax.swing.JLabel lblHeartRate1;
-    private javax.swing.JLabel lblRespiratory;
-    private javax.swing.JLabel lblRespiratory1;
-    private javax.swing.JLabel lblWeight;
-    private javax.swing.JLabel lblWeight1;
     private javax.swing.JPanel paneAnalyseCommunity;
     private javax.swing.JPanel panecrudvitals;
-    private javax.swing.JPanel paneeditvitals;
     private javax.swing.JPanel paneviewvitals;
-    private javax.swing.JPanel panevitals;
-    private javax.swing.JTextField txtBp;
-    private javax.swing.JTextField txtBp1;
-    private javax.swing.JTextField txtHeart;
-    private javax.swing.JTextField txtHeart1;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

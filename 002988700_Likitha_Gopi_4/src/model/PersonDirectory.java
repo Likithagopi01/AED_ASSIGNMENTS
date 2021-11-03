@@ -5,12 +5,16 @@
  */
 package model;
 
+/**
+ *
+ * @author Likitha G
+ */
 import java.util.ArrayList;
 
 public class PersonDirectory {
 
 //    ArrayList<Person> personDirectory = new ArrayList();
-   private ArrayList<Person> personDirectory;
+   private ArrayList<Person> personDirectory = new ArrayList<>();
 
    public PersonDirectory() {
         personDirectory = new ArrayList<>();

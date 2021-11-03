@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 /**
  *
- * @author psrib
+ * @author Likitha G
  */
 public class Patient  {
 
