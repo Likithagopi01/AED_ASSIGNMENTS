@@ -7,6 +7,7 @@ package UI;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.City;
@@ -15,11 +16,15 @@ import model.Encounter;
 import model.EncounterHistory;
 import model.House;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Patient;
 import model.PatientDirectory;
 import model.Person;
 import model.PersonDirectory;
 import model.VitalSigns;
+import java.util.regex.*;
+import javax.naming.InvalidNameException;
 
 /**
  *
@@ -30,8 +35,6 @@ public class PersonJPanel extends javax.swing.JPanel {
     /**
      * Creates new form CreateJPanel
      */
-    
-     
     private PersonDirectory personDirectory;
     Person person;
     House house;
@@ -103,7 +106,9 @@ public class PersonJPanel extends javax.swing.JPanel {
         txtHouse6 = new javax.swing.JTextField();
         btnUpdate1 = new javax.swing.JButton();
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        setBackground(new java.awt.Color(153, 153, 153));
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Manage Person Details:");
 
@@ -132,6 +137,7 @@ public class PersonJPanel extends javax.swing.JPanel {
         });
 
         btnDelete.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(255, 0, 0));
         btnDelete.setText("Delete Person");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,30 +147,45 @@ public class PersonJPanel extends javax.swing.JPanel {
 
         tblPerson.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Name", "Age", "City", "Community", "House No", "Title 6"
+                "Name", "Age", "City", "Community", "House No"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblPerson);
+
+        CreatePanel.setBackground(new java.awt.Color(153, 153, 153));
 
         lblCreate.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblCreate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCreate.setText("Create Person Details:");
         lblCreate.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        lblName.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblName.setText("Name:");
 
+        lblAge.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblAge.setText("Age:");
 
+        lblCity.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblCity.setText("City:");
 
+        lblCommunity.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblCommunity.setText("Community:");
 
+        lblHouse.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblHouse.setText("House No:");
 
         txtName.addActionListener(new java.awt.event.ActionListener() {
@@ -191,6 +212,7 @@ public class PersonJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnAdd.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -254,6 +276,7 @@ public class PersonJPanel extends javax.swing.JPanel {
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
+        ViewPanel.setBackground(new java.awt.Color(153, 153, 153));
         ViewPanel.setPreferredSize(new java.awt.Dimension(315, 319));
 
         lbView.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -261,14 +284,19 @@ public class PersonJPanel extends javax.swing.JPanel {
         lbView.setText("View Person Details:");
         lbView.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        lblName1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblName1.setText("Name:");
 
+        lblAge1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblAge1.setText("Age:");
 
+        lblCity1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblCity1.setText("City:");
 
+        lblCommunity1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblCommunity1.setText("Community:");
 
+        lblHouse1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblHouse1.setText("House No:");
 
         txtName1.addActionListener(new java.awt.event.ActionListener() {
@@ -347,19 +375,26 @@ public class PersonJPanel extends javax.swing.JPanel {
                 .addContainerGap(72, Short.MAX_VALUE))
         );
 
+        UpdatePanel.setBackground(new java.awt.Color(153, 153, 153));
+
         lblUpdate.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblUpdate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUpdate.setText("Update Person Details:");
         lblUpdate.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        lblName6.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblName6.setText("Name:");
 
+        lblAge6.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblAge6.setText("Age:");
 
+        lblCity6.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblCity6.setText("City:");
 
+        lblCommunity6.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblCommunity6.setText("Community:");
 
+        lblHouse6.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblHouse6.setText("House No:");
 
         txtName6.addActionListener(new java.awt.event.ActionListener() {
@@ -386,6 +421,7 @@ public class PersonJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnUpdate1.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
         btnUpdate1.setText("Update");
         btnUpdate1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -463,18 +499,16 @@ public class PersonJPanel extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnCreate)
+                        .addGap(26, 26, 26)
+                        .addComponent(btnView)
+                        .addGap(26, 26, 26)
+                        .addComponent(btnUpdate)
+                        .addGap(26, 26, 26)
+                        .addComponent(btnDelete))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(btnCreate)
-                            .addGap(26, 26, 26)
-                            .addComponent(btnView)
-                            .addGap(26, 26, 26)
-                            .addComponent(btnUpdate)
-                            .addGap(26, 26, 26)
-                            .addComponent(btnDelete))))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -495,7 +529,7 @@ public class PersonJPanel extends javax.swing.JPanel {
                     .addComponent(ViewPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CreatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(UpdatePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -507,7 +541,7 @@ public class PersonJPanel extends javax.swing.JPanel {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-               
+
         int selectedRowIndex = tblPerson.getSelectedRow();
 
         if (selectedRowIndex < 0) {
@@ -515,14 +549,14 @@ public class PersonJPanel extends javax.swing.JPanel {
             return;
         }
 
-         setDefaultOptions();
-         UpdatePanel.setVisible(true);
+        setDefaultOptions();
+        UpdatePanel.setVisible(true);
 
         DefaultTableModel model = (DefaultTableModel) tblPerson.getModel();
-        Person person=(Person) tblPerson.getValueAt(selectedRowIndex, 0);
+        Person person = (Person) tblPerson.getValueAt(selectedRowIndex, 0);
         House house = person.getHouse();
 //        House house = ( House) tblPerson.getValueAt(selectedRowIndex, 0);
-        txtName6.setText(person.getPersonName());
+        txtName6.setText(person.toString());
         txtAge6.setText(person.getAge());
         txtCity6.setText(house.getCityName());
         txtCommunity6.setText(house.getCommunityName());
@@ -544,89 +578,107 @@ public class PersonJPanel extends javax.swing.JPanel {
     private void txtHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHouseActionPerformed
         // TODO add your handling code here:
 
-        
+
     }//GEN-LAST:event_txtHouseActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
 //        Person person1 = personDirectory.addNewPerson();
-        
-String serialregex = "^[A-Za-z]$";
-String intregex = "[0-9]+";
-String regex = "^[0-9]{1,2} "+" [A-Z a-z]{1,20}$";
-if((txtName.getText().isEmpty ()||txtCommunity.getText().isEmpty()||txtCity.getText().isEmpty()||txtAge.getText().isEmpty()|| txtHouse.getText().isEmpty()))
-                {
-        JOptionPane.showMessageDialog(this, "Enter All Details");
-        }
-//        else if(!txtName.equals(serialregex) ){
-//            JOptionPane.showMessageDialog(this, "Enter Proper Name Details !");            
-////        }
-//        else if(!txtCommunity.equals(serialregex)){
-//            JOptionPane.showMessageDialog(this, "Enter Proper Community Details !");            
-//        }
-//        else if(!txtCity.equals(serialregex)){
-//            JOptionPane.showMessageDialog(this, "Enter Proper City Details !");            
-//        }
-//        else if(!txtHouse.equals(intregex)){
-//            JOptionPane.showMessageDialog(this, "Enter Proper House Details !");            
-//        }
-//
-//
-//        
-        else{
-            
-        String personName = txtName.getText();
-        String age = txtAge.getText();
-        int houseNo = Integer.parseInt(txtHouse.getText());
-        String community = txtCommunity.getText();
-        String city = txtCity.getText();
- 
-//        Person person = personDirectory.addNewPerson();
 
-//        House house = new House();
-//        House house = personDirectory.addNewPerson();
-//        person.setPersonName(personName);
-//        person.setAge(age);
-//        house.setCommunityName(community);
-//        house.setCityName(city);
-//        person.setHouse(house);
-        Patient patient = new Patient();
-        Encounter encounter = new Encounter();
-        EncounterHistory encounterHistory = new EncounterHistory();
-        VitalSigns vitalSigns = new VitalSigns();
-        Person person = personDirectory.addNewPerson();
+        String serialregex = "^[A-Za-z]$";
+        String intregex = "[0-9]+";
+        String regex = "^[0-9]{1,2} " + " [A-Z a-z]{1,20}$";
+        if ((txtName.getText().isEmpty() || txtCommunity.getText().isEmpty() || txtCity.getText().isEmpty() || txtAge.getText().isEmpty() || txtHouse.getText().isEmpty())) {
+            JOptionPane.showMessageDialog(this, "Enter All Details");
+        } else {
+            int houseNo;
+            String Nameregex = "^[A-Za-z]\\w{1,29}$";
+            String houseRegex = "[0-9]+";
+            String personName = (txtName.getText());
+            String age = (txtAge.getText());
+            String community = (txtCommunity.getText());
+            String city = (txtCity.getText());
+            if (!personName.matches(Nameregex) || (personName.isEmpty())) {
+                JOptionPane.showMessageDialog(this, "Enter Proper Name");
+                return;
+            }
+            if (!community.matches(Nameregex) || (community.isEmpty())) {
+                JOptionPane.showMessageDialog(this, "Enter Proper community Name");
+                return;
+            }
+            if (!city.matches(Nameregex) || (city.isEmpty())) {
+                JOptionPane.showMessageDialog(this, "Enter Proper city Name");
+                return;
+            }
+//            boolean ageValid = true;
+            String s[] = age.split(" ");
+            List range = new ArrayList<>();
+            range.add("days");
+            range.add("months");
+            range.add("years");
+            if (s.length > 1 && s.length < 3) {
+                if (Integer.parseInt(s[0]) < 0) {
+                    JOptionPane.showMessageDialog(this, "Enter Proper Age");
+                    return;
+                }
 
-        person.setPersonName(personName);
-        person.setAge(age);
-        String ag = patient.ageCalculate(age);
-        person.setAgeGroup(ag);
+                if (!range.contains(s[1])) {
+                    JOptionPane.showMessageDialog(this, "Enter Proper Age");
+                    return;
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Enter Proper Age");
+                return;
+            }
 
-        House house = new House();
-        house.setCityName(city);
-        house.setCommunityName(community);
-        house.setHouseNo(houseNo);
-        house.setSetPerson(person);
-        house.setCommunityList(house);
-        house.setHouseList(house);
-        person.setHouse(house);
-//        ArrayList<Person> al = new ArrayList<>();
-//        al.add(person);
-////        temp.setList(al);
-//        personDirectory.setPersonDirectory(al);
+            try {
+                Integer.parseInt(txtHouse.getText());
+//                System.out.println(txtHouse.getText() + " is a valid integer");
+            } catch (NumberFormatException e) {
+//                System.out.println(txtHouse.getText() + " is not a valid integer");
+                JOptionPane.showMessageDialog(this, "Enter Proper House No");
+                return;
+            }
+            houseNo = Integer.parseInt(txtHouse.getText());
+            Patient patient = new Patient();
+            Encounter encounter = new Encounter();
+            EncounterHistory encounterHistory = new EncounterHistory();
+            VitalSigns vitalSigns = new VitalSigns();
+            Person person = personDirectory.addNewPerson();
+            String ag = patient.ageCalculate(age);
+            person.setAgeGroup(ag);
+            person.setPersonName(personName);
+            person.setAge(age);
+            House house = new House();
+            house.setCityName(city);
+            house.setCommunityName(community);
+            house.setHouseNo(houseNo);
+            house.setSetPerson(person);
+            house.setCommunityList(house);
+            house.setHouseList(house);
+            person.setHouse(house);
 
-        JOptionPane.showMessageDialog(this, "New Person Details added!");
+            JOptionPane.showMessageDialog(this, "New Person Details added!");
 
-        txtName.setText("");
-        txtAge.setText("");
-        txtCity.setText("");
-        txtCommunity.setText("");
-        txtHouse.setText("");
-        populateTable();
-        revalidate();
+            txtName.setText("");
+            txtAge.setText("");
+            txtCity.setText("");
+            txtCommunity.setText("");
+            txtHouse.setText("");
+            populateTable();
+            revalidate();
             repaint();
         }
     }//GEN-LAST:event_btnAddActionPerformed
 
+    public void ageValidation(String age) throws InvalidNameException {
+        try {
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidNameException("Missing space in age");
+//                JOptionPane.showMessageDialog(this, "Missing space in Age");
+        }
+    }
     private void txtName1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtName1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtName1ActionPerformed
@@ -661,39 +713,98 @@ if((txtName.getText().isEmpty ()||txtCommunity.getText().isEmpty()||txtCity.getT
 
     private void btnUpdate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate1ActionPerformed
         // TODO add your handling code here:
-        
+
         int selectedRowIndex = tblPerson.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel) tblPerson.getModel();
         Person person = (Person) model.getValueAt(selectedRowIndex, 0);
-        Update(person);   
+
+        String serialregex = "^[A-Za-z]$";
+        String intregex = "[0-9]+";
+        String regex = "^[0-9]{1,2} " + " [A-Z a-z]{1,20}$";
+        if ((txtName6.getText().isEmpty() || txtCommunity6.getText().isEmpty() || txtCity6.getText().isEmpty() || txtAge6.getText().isEmpty() || txtHouse6.getText().isEmpty())) {
+            JOptionPane.showMessageDialog(this, "Enter All Details");
+        } else {
+            int houseNo;
+            String Nameregex = "^[A-Za-z]\\w{1,29}$";
+            String personName = (txtName6.getText());
+            String age = (txtAge6.getText());
+            String community = (txtCommunity6.getText());
+            String city = (txtCity6.getText());
+            if (!personName.matches(Nameregex) || (personName.isEmpty())) {
+                JOptionPane.showMessageDialog(this, "Enter Proper Name");
+                return;
+            }
+
+            String s[] = age.split(" ");
+            List range = new ArrayList<>();
+            range.add("days");
+            range.add("months");
+            range.add("years");
+            if (s.length > 1 && s.length < 3) {
+                if (Integer.parseInt(s[0]) < 0) {
+                    JOptionPane.showMessageDialog(this, "Enter Proper Age");
+                    return;
+                }
+                if (!range.contains(s[1])) {
+                    JOptionPane.showMessageDialog(this, "Enter Proper Age");
+                    return;
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Enter Proper Age");
+                return;
+            }
+            if (!city.matches(Nameregex) || (city.isEmpty())) {
+                JOptionPane.showMessageDialog(this, "Enter Proper city Name");
+                return;
+            }
+            if (!community.matches(Nameregex) || (community.isEmpty())) {
+                JOptionPane.showMessageDialog(this, "Enter Proper community Name");
+                return;
+            }
+            try {
+                Integer.parseInt(txtHouse6.getText());
+//                System.out.println(txtHouse.getText() + " is a valid integer");
+            } catch (NumberFormatException e) {
+//                System.out.println(txtHouse.getText() + " is not a valid integer");
+                JOptionPane.showMessageDialog(this, "Enter Proper House No");
+                return;
+            }
+            Update(person);
+
+            populateTable();
+
+            revalidate();
+            repaint();
+        }
+
     }//GEN-LAST:event_btnUpdate1ActionPerformed
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                // TODO add your handling code here:
-  
-        
-          int selectedRowIndex = tblPerson.getSelectedRow();
+        // TODO add your handling code here:
+
+        int selectedRowIndex = tblPerson.getSelectedRow();
 
         if (selectedRowIndex < 0) {
             JOptionPane.showMessageDialog(this, "Please select a row to View.");
             return;
         }
-          
-         setDefaultOptions();
-         ViewPanel.setVisible(true);
+
+        setDefaultOptions();
+        ViewPanel.setVisible(true);
 
         DefaultTableModel model = (DefaultTableModel) tblPerson.getModel();
-        Person person=(Person) tblPerson.getValueAt(selectedRowIndex, 0);
+        Person person = (Person) tblPerson.getValueAt(selectedRowIndex, 0);
         House house = person.getHouse();
 //        House house = ( House) tblPerson.getValueAt(selectedRowIndex, 0);
-        txtName1.setText(person.getPersonName());
+        txtName1.setText(person.toString());
         txtAge1.setText(person.getAge());
         txtCity1.setText(house.getCityName());
         txtCommunity1.setText(house.getCommunityName());
         txtHouse1.setText(String.valueOf(house.getHouseNo()));
-       
-         
-        
+
+        revalidate();
+        repaint();
+
     }//GEN-LAST:event_btnViewActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -764,16 +875,14 @@ if((txtName.getText().isEmpty ()||txtCommunity.getText().isEmpty()||txtCity.getT
     private javax.swing.JTextField txtName6;
     // End of variables declaration//GEN-END:variables
 
-    
-    
-       protected void setDefaultOptions() {
+    protected void setDefaultOptions() {
 
         CreatePanel.setVisible(false);
         ViewPanel.setVisible(false);
         UpdatePanel.setVisible(false);
     }
-    
-        private void Update(Person person) {
+
+    private void Update(Person person) {
         House house = person.getHouse();
         person.setPersonName(txtName6.getText());
         person.setAge(txtAge6.getText());
@@ -782,9 +891,17 @@ if((txtName.getText().isEmpty ()||txtCommunity.getText().isEmpty()||txtCity.getT
         house.setHouseNo(Integer.parseInt(txtHouse6.getText()));
         populateTable();
 
+        txtName6.setText("");
+        txtAge6.setText("");
+        txtCity6.setText("");
+        txtCommunity6.setText("");
+        txtHouse6.setText("");
+//        populateTable();
+        revalidate();
+        repaint();
+
     }
 
-    
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) tblPerson.getModel();
 
@@ -796,11 +913,10 @@ if((txtName.getText().isEmpty ()||txtCommunity.getText().isEmpty()||txtCity.getT
 ////        for (Person person : PatientDirectory.map) {
             Object[] row = new Object[10];
             row[0] = person;
-            row[1] = person.getPersonName();
-            row[2] = person.getAge();
-            row[3] = house.getCityName();
-            row[4] = house.getCommunityName();
-            row[5] = house.getHouseNo();
+            row[1] = person.getAge();
+            row[2] = house.getCityName();
+            row[3] = house.getCommunityName();
+            row[4] = house.getHouseNo();
             model.addRow(row);
 
         }

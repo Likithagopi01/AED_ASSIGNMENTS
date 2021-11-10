@@ -43,7 +43,7 @@ public class PersonDirectory {
         ArrayList<Person> searchPatientDirectory = new ArrayList();
         for(Person person: personDirectory)
         {
-            if(person.getPersonName().toLowerCase().startsWith(key.toLowerCase()))
+            if(person.toString().toLowerCase().startsWith(key.toLowerCase()))
             {
                 if(person.getPatient()!=null)
                 {

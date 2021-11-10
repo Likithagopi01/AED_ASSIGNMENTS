@@ -151,7 +151,7 @@ public class VitalSigns {
     int RespiratoryRate;
     int HeartRate;
     int BloodPressure;
-    float WeightPounds;
+    int WeightPounds;
 
     public int getRespiratoryRate() {
         return RespiratoryRate;
@@ -177,11 +177,11 @@ public class VitalSigns {
         this.BloodPressure = BloodPressure;
     }
 
-    public float getWeightPounds() {
+    public int getWeightPounds() {
         return WeightPounds;
     }
 
-    public void setWeightPounds(float WeightPounds) {
+    public void setWeightPounds(int WeightPounds) {
         this.WeightPounds = WeightPounds;
     }
 

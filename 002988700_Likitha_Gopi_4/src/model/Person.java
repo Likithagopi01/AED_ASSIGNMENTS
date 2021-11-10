@@ -63,7 +63,8 @@ public class Person {
 //       
 //    }
 //    
-    public String getPersonName() {
+    @Override
+    public String toString() {
         return personName;
     }
 

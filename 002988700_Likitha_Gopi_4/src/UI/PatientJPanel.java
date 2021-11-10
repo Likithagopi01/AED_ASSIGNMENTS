@@ -46,8 +46,8 @@ public class PatientJPanel extends javax.swing.JPanel {
         populatePatientsTable(personList);
         
          setDefaultOptions1();
-//        revalidate();
-//            repaint();
+        revalidate();
+            repaint();
     }
 
     private void populatePatientsTable(ArrayList<Person> personList) {
@@ -58,22 +58,18 @@ public class PatientJPanel extends javax.swing.JPanel {
             return;
         } else {
             model.setRowCount(0);
-//      System.out.println("size"+ history.getHistory().size());
-//    System.out.println(personDirectory.getPersonDirectory());
+            
             for (Person person : personList) {
-//            House house = person.getHouse();
-////        for (Person person : PatientDirectory.map) {
+                
             System.out.println("Person value: "+person);
                 Object[] row = new Object[10];
                 row[0] = person;
-                row[1] = person.getPersonName();
-                row[2] = person.getAge();
+                row[1] = person.getAge();
                 if (person.getPatient() != null) {
-                    row[3] = person.getPatient().getPid();
+                    row[2] = person.getPatient().getPid();
                 } else {
-                    row[3] = "Not a Patient";
+                    row[2] = "Not a Patient";
                 }
-//                row[4] = 
                 model.addRow(row);
             }
         }
@@ -125,22 +121,31 @@ public class PatientJPanel extends javax.swing.JPanel {
         txtRespiratory1 = new javax.swing.JTextField();
         txtWeight1 = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(153, 153, 153));
         setToolTipText("");
 
         tblPerson1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Name", "Age", "PatientID", "Doctor Name"
+                "Name", "Age", "PatientID"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblPerson1);
 
-        lblPatient.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblPatient.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lblPatient.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPatient.setText("Manage Patient Details:");
 
@@ -168,16 +173,22 @@ public class PatientJPanel extends javax.swing.JPanel {
             }
         });
 
+        paneCreatePatient.setBackground(new java.awt.Color(153, 153, 153));
+
         lblCreatePatient.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblCreatePatient.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCreatePatient.setText("Create Patient:");
 
+        lblPatientId.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblPatientId.setText("Patient ID");
 
+        lblDoctor.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblDoctor.setText("Doctor Name");
 
+        lblPurpose.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblPurpose.setText("Purpose of Visit");
 
+        btnAddPatient.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
         btnAddPatient.setText("Add");
         btnAddPatient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,16 +252,22 @@ public class PatientJPanel extends javax.swing.JPanel {
                 .addContainerGap(88, Short.MAX_VALUE))
         );
 
+        paneAddVitals.setBackground(new java.awt.Color(153, 153, 153));
+
         lblCreatePatient1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblCreatePatient1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCreatePatient1.setText("Add Vital Details:");
 
+        lblHeartRate.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblHeartRate.setText("Heart Rate");
 
+        lblBp.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblBp.setText("Blood Pressure");
 
+        lblRespiratory.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblRespiratory.setText("Respiratory Rate");
 
+        lblWeight.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblWeight.setText("Weight(in Pounds)");
 
         txtBp.addActionListener(new java.awt.event.ActionListener() {
@@ -271,6 +288,7 @@ public class PatientJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnAddVitals1.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
         btnAddVitals1.setText("Add");
         btnAddVitals1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -327,16 +345,22 @@ public class PatientJPanel extends javax.swing.JPanel {
                 .addContainerGap(50, Short.MAX_VALUE))
         );
 
+        paneViewVitals.setBackground(new java.awt.Color(153, 153, 153));
+
         lblCreatePatient2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblCreatePatient2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCreatePatient2.setText("View Vital Details:");
 
+        lblHeartRate1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblHeartRate1.setText("Heart Rate");
 
+        lblBp1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblBp1.setText("Blood Pressure");
 
+        lblRespiratory1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblRespiratory1.setText("Respiratory Rate");
 
+        lblWeight1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblWeight1.setText("Weight(in Pounds)");
 
         txtBp1.addActionListener(new java.awt.event.ActionListener() {
@@ -443,7 +467,7 @@ public class PatientJPanel extends javax.swing.JPanel {
                         .addComponent(paneAddVitals, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(paneViewVitals, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(paneCreatePatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -451,6 +475,7 @@ public class PatientJPanel extends javax.swing.JPanel {
 
         int selectedRow= tblPerson1.getSelectedRow();
         Person person=(Person) tblPerson1.getValueAt(selectedRow, 0);
+        
         if(person.getPatient()!=null)
         {
             JOptionPane.showMessageDialog(this, "Paient already exists.","Error",
@@ -470,7 +495,10 @@ public class PatientJPanel extends javax.swing.JPanel {
         Patient patient = new Patient();
         Encounter encounter = new Encounter();
         EncounterHistory encounterHistory = new EncounterHistory();
-        
+             if (txtDoctor.getText().isEmpty() || txtPurpose.getText().isEmpty() || txtPatientID.getText().isEmpty() ) {
+            JOptionPane.showMessageDialog(this, "Enter All Details");
+        }
+             else{
         encounter.setDoctorName(txtDoctor.getText());
         encounter.setVisitedDate(new Date());
         encounter.setPurposeOfVist(txtPurpose.getText());
@@ -480,6 +508,8 @@ public class PatientJPanel extends javax.swing.JPanel {
         patient.setEncounterHistory(encounterHistory);
 
         patient.setPid(txtPatientID.getText());
+     
+        
         //Adding Patient to Person
          person.setPatient(patient);
         JOptionPane.showMessageDialog(this, "Patient added!!", "Update",
@@ -487,6 +517,12 @@ public class PatientJPanel extends javax.swing.JPanel {
        ArrayList<Person> personList = personDirectory.getPersonDirectory();
         populatePatientsTable(personList);
         
+             }
+        txtPatientID.setText("");
+        txtPurpose.setText("");
+        txtDoctor.setText("");
+        revalidate();
+            repaint();
     }
     
     
@@ -534,14 +570,9 @@ public class PatientJPanel extends javax.swing.JPanel {
         paneCreatePatient.setVisible(true);
         int selectedRow= tblPerson1.getSelectedRow();
         var temp = tblPerson1.getValueAt(selectedRow, 0);
-        System.out.println(temp);
+//        System.out.println(temp);
         this.selectedPerson = temp;
-//        if(person.getPatient()!=null)
-//        {
-//            JOptionPane.showMessageDialog(this, "Paient already exists.","Error",
-//                    JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
+
     }//GEN-LAST:event_btnCreatePatientActionPerformed
 
     private void btnAddVitalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddVitalsActionPerformed
@@ -554,7 +585,7 @@ public class PatientJPanel extends javax.swing.JPanel {
         }
         
         int selectedRow= tblPerson1.getSelectedRow();
-        var temp = tblPerson1.getValueAt(selectedRow, 3);
+        var temp = tblPerson1.getValueAt(selectedRow, 2);
         if(temp == "Not a Patient"){
             JOptionPane.showMessageDialog(this, "Not a Patient.","Error",
                     JOptionPane.ERROR_MESSAGE);
@@ -582,21 +613,23 @@ public class PatientJPanel extends javax.swing.JPanel {
         
         //getting doctors name and patient id
 //        String docName = previousEnconter.getDoctorName();
-        
+                     if (txtHeart.getText().isEmpty() || txtBp.getText().isEmpty() || txtRespiratory.getText().isEmpty() || txtWeight.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Enter All Details");
+        }
+                     else{
         int heartRate = Integer.parseInt(txtHeart.getText());
         int bp = Integer.parseInt(txtBp.getText());
         int resRate = Integer.parseInt(txtRespiratory.getText());
-        float weight = Integer.parseInt(txtWeight.getText());
+        int weight = Integer.parseInt(txtWeight.getText());
         
         vitalSign.setHeartRate(heartRate);
         vitalSign.setBloodPressure(bp);
         vitalSign.setRespiratoryRate(resRate);
         vitalSign.setWeightPounds(weight);
         encounter.setVs(vitalSign);
-//        encounter.setDoctorName(docName);
         JOptionPane.showMessageDialog(this, "Vital Signs added!!", "Update",
                 JOptionPane.INFORMATION_MESSAGE);
-        
+                     }
         ArrayList<Encounter> al = p.getEncounterHistory().getList();
         al.add(encounter);
         temp.setList(al);
@@ -619,7 +652,7 @@ public class PatientJPanel extends javax.swing.JPanel {
        Person person = (Person) tblPerson1.getValueAt(selectedRow, 0);
        
 
-             var temp = tblPerson1.getValueAt(selectedRow, 3);
+             var temp = tblPerson1.getValueAt(selectedRow, 2);
        var temp1 = person.getVitalSign();
       
         if(temp == "Not a Patient"){
