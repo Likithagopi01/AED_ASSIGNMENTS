@@ -123,6 +123,100 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void loginJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginJButtonActionPerformed
         // Get user name
+                String userName = userNameJTextField.getText().trim();
+        char[] passa = passwordField.getPassword();
+        String password = String.valueOf(passa);
+        
+        System.out.println("USS "+ userName);
+                System.out.println("Pass "+ password);
+
+        //Step1: Check in the system admin user account directory if you have the user
+        UserAccount userAccount=system.getUserAccountDirectory().authenticateUser(userName, password);
+        
+        System.out.println("Syss "+ system.getUserAccountDirectory().getUserAccountList().size());
+        EcoSystem inEcoSystem =null;
+        System.out.println("UAA "+ userAccount);
+        Organization inOrganization=null;
+        
+//        
+//        if(userAccount==null){
+//            //Step 2: Go inside each network and check each enterprise
+//           // for(Network network:system.getNetworkList()){
+//                //Step 2.a: check against each enterprise
+//                for(Enterprise enterprise:system.getEnterpriseDirectory().getEnterpriseList())
+//                {
+//                    //userAccount=enterprise.getUserAccountDirectory().authenticateUser(userName, password);
+//                    if(userAccount==null)
+//                    {
+//                       //Step 3:check against each organization for each enterprise
+//                       for(Organization organization:enterprise.getRestaurantDirectory().getOrganizationList())
+//                       {
+//                           userAccount=organization.getUserAccountDirectory().authenticateUser(userName, password);
+//                           if(userAccount!=null)
+//                           {
+//                               inEnterprise=enterprise;
+//                               inOrganization=organization;
+//                               break;
+//                           }
+//                       }
+//                    }
+//                    
+//                    else{
+//                       inEnterprise=enterprise;
+//                       break;
+//                    }
+//                    if(inOrganization!=null){
+//                        break;
+//                    }  
+//                }
+//        }
+        
+       // step-3 --to check for customer users
+       
+        if(userAccount==null){
+           for(Organization organization: system.getCustomerDirectory().getOrganizationList())
+                       {
+                           userAccount=organization.getUserAccountDirectory().authenticateUser(userName, password);
+                           if(userAccount!=null)
+                           {
+                               inOrganization=organization;
+                               break;
+                           }
+                       }
+        }
+//         //step-4--to check for deliver users
+//               if(userAccount==null){
+//           for(Organization organization:system.getDeliveryManDirectory().getOrganizationList())
+//                       {
+//                           userAccount=organization.getUserAccountDirectory().authenticateUser(userName, password);
+//                           if(userAccount!=null)
+//                           {
+//                               inOrganization=organization;
+//                               break;
+//                           }
+//                       }
+//        }
+        
+        if(userAccount==null){
+            JOptionPane.showMessageDialog(null, "Invalid credentials");
+            return;
+        }
+        else{
+            CardLayout layout=(CardLayout)container.getLayout();
+            container.add("workArea", userAccount.getRole().createWorkArea(container, userAccount, system));
+            //container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEcoSystem, system));
+            layout.next(container);
+            
+            
+            
+               
+            
+        }
+        
+        loginJButton.setEnabled(false);
+        logoutJButton.setEnabled(true);
+        userNameJTextField.setEnabled(false);
+        passwordField.setEnabled(false);
        
     }//GEN-LAST:event_loginJButtonActionPerformed
 

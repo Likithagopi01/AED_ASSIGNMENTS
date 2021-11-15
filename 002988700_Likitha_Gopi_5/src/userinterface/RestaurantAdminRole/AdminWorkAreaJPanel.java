@@ -3,8 +3,13 @@
 package userinterface.RestaurantAdminRole;
 
 
+import Business.EcoSystem;
+import Business.Restaurant.Restaurant;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import userinterface.SystemAdminWorkArea.AddRestaurantJPanel;
+import userinterface.SystemAdminWorkArea.CreateCustomerJPanel;
 
 /**
  *
@@ -13,15 +18,27 @@ import javax.swing.JPanel;
 public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     
     JPanel userProcessContainer;
-    
+    EcoSystem system;
+    String resName;
     /** Creates new form AdminWorkAreaJPanel */
-    public AdminWorkAreaJPanel(JPanel userProcessContainer) {
+    public AdminWorkAreaJPanel(JPanel userProcessContainer,  UserAccount ua, EcoSystem system) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-      
-        //valueLabel.setText();
+        this.system = system;
+        System.out.println("UA  "+ ua.getUsername());
+        resName = findRestaurantName(ua.getUsername());
+        valueLabel.setText(resName);
     }
     
+    public String findRestaurantName(String name){
+        for(Restaurant res : system.getRestaurantDirectory().getRestaurantList()){
+            if(name.equals(res.getManager())){
+                return res.getName();
+            }
+        }
+        return "NOT FOUND";
+            
+    }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -77,15 +94,26 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void userJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userJButtonActionPerformed
         // TODO add your handling code here:
-        
+        ManageRestaurantJPanel manageRestaurantJPanel = new ManageRestaurantJPanel(userProcessContainer, system, resName);
+        userProcessContainer.add("Manage Restaurant", manageRestaurantJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_userJButtonActionPerformed
 
     private void manageEmployeeJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageEmployeeJButtonActionPerformed
-
+       
+        AddMenuJPanel addMenuJPanel = new AddMenuJPanel(userProcessContainer, system, resName);
+        userProcessContainer.add("AddMenu", addMenuJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_manageEmployeeJButtonActionPerformed
 
     private void manageOrganizationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageOrganizationJButtonActionPerformed
-
+        
+        ManageOrderJPanel manageOrderJPanel = new ManageOrderJPanel(userProcessContainer, system, resName);
+        userProcessContainer.add("ManagerOrder", manageOrderJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_manageOrganizationJButtonActionPerformed
     
     
