@@ -39,15 +39,12 @@ public class CustomerTest {
     @Test
     public void testCustomerName() { 
         
-         Customer customer = new Customer();
-        customer.setCustomerName("Java");
+       Customer customer = new Customer();
+       customer.setCustomerName("Java");
        assertEquals("Java",customer.getCustomerName());
-//assertTrue(customer.getCustomerName()=="Java");
-    }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    }
+   
+
 }
+

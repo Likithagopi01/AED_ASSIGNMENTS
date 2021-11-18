@@ -91,6 +91,8 @@ public class AddMenuJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(114, 163, 17));
+
         addMenu.setText("Add Menu");
         addMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

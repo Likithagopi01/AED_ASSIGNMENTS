@@ -74,6 +74,8 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(114, 163, 17));
+
         restType.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 restTypeMouseClicked(evt);

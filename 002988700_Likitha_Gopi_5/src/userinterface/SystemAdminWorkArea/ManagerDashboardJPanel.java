@@ -82,6 +82,8 @@ public class ManagerDashboardJPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(114, 163, 17));
+
         addRest2.setText("Add Rest");
         addRest2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -286,8 +288,6 @@ public class ManagerDashboardJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addRest;
-    private javax.swing.JButton addRest1;
     private javax.swing.JButton addRest2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
