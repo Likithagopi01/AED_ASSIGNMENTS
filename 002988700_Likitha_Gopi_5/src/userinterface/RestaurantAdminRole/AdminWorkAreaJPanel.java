@@ -29,6 +29,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         resName = findRestaurantName(ua.getUsername());
         valueLabel.setText(resName);
     }
+
     
     public String findRestaurantName(String name){
         for(Restaurant res : system.getRestaurantDirectory().getRestaurantList()){
