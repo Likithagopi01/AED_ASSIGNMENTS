@@ -104,6 +104,7 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(114, 163, 17));
 
+        acceptOrder.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         acceptOrder.setText("Accept Order");
         acceptOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,6 +112,7 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
             }
         });
 
+        cancelOrder.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         cancelOrder.setText("Cancel Order");
         cancelOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,8 +134,9 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(orderList);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("View Orders");
+        jLabel1.setText("VIEW ORDERS");
 
+        assignDel.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         assignDel.setText("Assign Delivery Man");
         assignDel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,12 +146,16 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(114, 163, 17));
 
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel2.setText("List of Available Delivery Man");
 
+        deliveryCB.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         deliveryCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Delivery Person" }));
 
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel3.setText("Choose Delivery man");
 
+        assignToDel.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         assignToDel.setText("Assign");
         assignToDel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,11 +175,11 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
                         .addGap(144, 144, 144)
                         .addComponent(deliveryCB, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(294, 294, 294)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(312, 312, 312)
-                        .addComponent(assignToDel)))
+                        .addComponent(assignToDel))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(294, 294, 294)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(114, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -196,6 +203,7 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jButton2.setText("View Order Details");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
