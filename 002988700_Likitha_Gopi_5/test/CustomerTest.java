@@ -47,6 +47,7 @@ public class CustomerTest {
        assertEquals("likitha",db.retrieveSystem().getCustomerDirectory().getCustomerList().get(0).getCustomerName());
         System.out.println(db.retrieveSystem().getCustomerDirectory().getCustomerList().get(0).getCustomerName());
     }
+    
    @Test
     public void testDeliveryName() { 
 
